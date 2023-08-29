@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { TodoInterface } from '../services/interfaces/TodoInterface';
 import { api_base } from '../services/constants/Constants';
 import { getTodos, completeTodo, addNewTodo, deleteTodo } from '../services/requests/TodoRequests'; 
+import Icons from '../components/icons/MuiIcons';
+import { StartCards } from '../components/cards/StartCards';
 
 const Start = () => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -62,6 +64,7 @@ const Start = () => {
   return (
     <div>
         <h1>Welcome $username</h1>
+		<StartCards />
 			<h4>Your Reminders</h4>
 
 			<div className="todos">
@@ -69,13 +72,15 @@ const Start = () => {
 					<div className={
 						"todo" + (todo.complete ? " is-complete" : "")
 					} key={todo._id} onClick={() => completeTodo(todo._id)}>
-						<div className="checkbox"></div>
+					<div className="checkbox">
+						{todo.complete ? <Icons.CheckCircleIcon /> : <Icons.CircleIcon />}
+					</div>
 
 						<div className="text">{todo.text}</div>
 						<div className="text">{todo.description}</div>
 						<div className="text">.........{todo.dueDate.toString()}</div>
 
-						<div className="delete-todo" onClick={() => handleDeleteTodo(todo._id)}>x</div>
+						<div className="delete-todo" onClick={() => handleDeleteTodo(todo._id)}><Icons.DeleteForeverIcon sx={{color:'red'}}/></div>
 					</div>
 				)) : (
 					<p>You currently have no tasks</p>

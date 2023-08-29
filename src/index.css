@@ -1,10 +1,13 @@
 :root {
-	--primary: #D81E5B;
+	--primary: #00BFFF;
 	--secondary: #8A4EFC;
 	--light: #EEE;
 	--light-alt: #61759b;
 	--dark: #131A26;
 	--dark-alt: #202B3E;
+	--sucess: #22ff00;
+	--error: red;
+	--pending:rgb(255, 234, 0);
 }
 
 * {
@@ -59,14 +62,16 @@ h4 {
 	height: 20px;
 	margin-right: 16px;
 	border-radius: 50%;
-	background-color: var(--dark-alt);
-	background-image: linear-gradient(to bottom, transparent, transparent);
+	/* background-color: var(--dark-alt);
+	background-image: linear-gradient(to bottom, transparent, transparent); */
 	transition: 0.4s;
+	color: var(--dark-alt);
 }
 
 .todo.is-complete .checkbox {
-	background-color: var(--primary);
-	background-image: linear-gradient(to bottom, var(--primary), var(--secondary));
+	/* background-color: var(--primary);
+	background-image: linear-gradient(to bottom, var(--primary), var(--secondary)); */
+	color: var(--sucess);
 }
 
 .todo .text {
@@ -85,8 +90,6 @@ h4 {
 	color: var(--light);
 	width: 24px;
 	height: 24px;
-	border-radius: 50%;
-	background-color: #AF1E2D;
 	display: flex;
 	align-items: center;
 	justify-content: center;

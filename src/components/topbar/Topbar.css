@@ -1,0 +1,22 @@
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: var(--dark-alt);
+  }
+  
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+  .heading {
+    padding: 8px;
+    color: var(--primary)
+  }
+  
+  .avatar {
+    display: flex;
+    align-items: center;
+  }
+  

@@ -1,0 +1,41 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .card {
+    background-color: var(--dark);
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    height: 20vh;
+    width: 65vh;
+    align-items: flex-start;
+    justify-content: space-between;
+    transition: 0.5s;
+    cursor: pointer;
+    margin-bottom: 16px;
+    color: white;
+    position: relative;
+  }
+  
+  .card-icon {
+    /* font-size: 32px; */
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+  
+  .card-title {
+   margin-top: 8vh;
+   font-size: 22px
+  }
+  
+  .card-amount {
+    font-size: 30px; /* Adjust the size as needed */
+    position: absolute;
+    top: 3vh;
+    right: 16px;
+  }
+  
