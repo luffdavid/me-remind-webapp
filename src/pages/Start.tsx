@@ -8,6 +8,7 @@ const Start = () => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
 	const [popupActive, setPopupActive] = useState(false);
 	const [newTodo, setNewTodo] = useState("");
+	const [dueDate, setDueDate] = useState("");
 
 	useEffect(() => {
         loadTodos();
@@ -37,7 +38,7 @@ const Start = () => {
       
     const handleAddTodo = async () => {
         try {
-          const newTodoData = await addNewTodo(newTodo);
+          const newTodoData = await addNewTodo(newTodo, dueDate);
     
           setTodos([...todos, newTodoData]);
     
@@ -70,6 +71,7 @@ const Start = () => {
 						<div className="checkbox"></div>
 
 						<div className="text">{todo.text}</div>
+						<div className="text">.........{todo.dueDate.toString()}</div>
 
 						<div className="delete-todo" onClick={() => handleDeleteTodo(todo._id)}>x</div>
 					</div>
@@ -86,6 +88,7 @@ const Start = () => {
 					<div className="content">
 						<h3>Add Task</h3>
 						<input type="text" className="add-todo-input" onChange={e => setNewTodo(e.target.value)} value={newTodo} />
+						<input type="date" className="add-todo-input-dueDate" onChange={e => setDueDate(e.target.value)} value={dueDate} />
 						<div className="button" onClick={handleAddTodo}>Create Task</div>
 					</div>
 				</div>
