@@ -44,7 +44,8 @@ h4 {
 .todo {
 	position: relative;
 	background-color: var(--dark);
-	padding: 16px;
+	padding: 32px;
+	height: auto;
 	border-radius: 16px;
 	display: flex;
 	align-items: center;
@@ -52,7 +53,15 @@ h4 {
 	cursor: pointer;
 	margin-bottom: 16px;
 }
-
+.todo-duedate { 
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-right: 15px;
+	margin-top: 5px;
+	color: white;
+	opacity: 0.7;
+}
 .todo:hover {
 	opacity: 0.8;
 }
@@ -95,7 +104,11 @@ h4 {
 	justify-content: center;
 	font-weight: 700;
 }
-
+.description {
+	color: white;
+	opacity: 0.7;
+	font-size: 15px;
+}
 .addPopup {
 	position: fixed;
 	bottom: 32px;

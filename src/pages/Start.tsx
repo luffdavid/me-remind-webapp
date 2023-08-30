@@ -72,7 +72,7 @@ const Start = () => {
 		<StartCards />
 			<h4>Your Reminders</h4>
 
-			<div className="todos">
+			{/* <div className="todos">
 				{todos.length > 0 ? todos.map(todo => (
 					<div className={
 						"todo" + (todo.complete ? " is-complete" : "")
@@ -90,7 +90,7 @@ const Start = () => {
 				)) : (
 					<p>You currently have no tasks</p>
 				)}
-			</div>
+			</div> */}
 
 		    <div className="addPopup" onClick={handleOpen}>+</div>
 				 <Modal

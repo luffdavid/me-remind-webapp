@@ -16,16 +16,16 @@ function App() {
 			element={ <Start />}
 			/>
 			<Route path="/incomplete-tasks"
-			element={<TaskList title="All Incomplete Tasks" />}
+			element={<TaskList title="All Incomplete Tasks"  taskType='INCOMPLETE'/>}
 			/>
            <Route path="/due-today-tasks"
-			element={<TaskList title="Tasks Due today" />}
+			element={<TaskList title="Tasks Due today" taskType='TODAY'/>}
 			/>
 			 <Route path="/overdue-tasks"
-			element={<TaskList title="Overdue Tasks" />}
+			element={<TaskList title="Overdue Tasks"  taskType='OVERDUE'/>}
 			/>
 			<Route path="/completed-tasks"
-			element={<TaskList title="Completed Tasks" />}
+			element={<TaskList title="Completed Tasks" taskType='COMPLETE'/>}
 			/>
 		</Routes>
 		</BrowserRouter>
