@@ -7,14 +7,12 @@
 	--dark-alt: #202B3E;
 	--sucess: #22ff00;
 	--error: red;
-	--pending:rgb(255, 234, 0);
 }
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-
 	font-family: "Fira Sans", sans-serif;
 }
 
@@ -53,6 +51,7 @@ h4 {
 	cursor: pointer;
 	margin-bottom: 16px;
 }
+
 .todo-duedate { 
 	position: absolute;
 	top: 0;
@@ -62,6 +61,7 @@ h4 {
 	color: white;
 	opacity: 0.7;
 }
+
 .todo:hover {
 	opacity: 0.8;
 }
@@ -71,15 +71,11 @@ h4 {
 	height: 20px;
 	margin-right: 16px;
 	border-radius: 50%;
-	/* background-color: var(--dark-alt);
-	background-image: linear-gradient(to bottom, transparent, transparent); */
 	transition: 0.4s;
 	color: var(--dark-alt);
 }
 
 .todo.is-complete .checkbox {
-	/* background-color: var(--primary);
-	background-image: linear-gradient(to bottom, var(--primary), var(--secondary)); */
 	color: var(--sucess);
 }
 
@@ -104,11 +100,13 @@ h4 {
 	justify-content: center;
 	font-weight: 700;
 }
+
 .description {
 	color: white;
 	opacity: 0.7;
 	font-size: 15px;
 }
+
 .addPopup {
 	position: fixed;
 	bottom: 32px;
@@ -126,26 +124,6 @@ h4 {
 	background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
 	cursor: pointer;
 }
-
-
-
-.closePopup {
-	position: absolute;
-	top: 16px;
-	right: 16px;
-	width: 20px;
-	height: 20px;
-	font-size: 20px;
-	color: var(--dark);
-	cursor: pointer;
-}
-
-.popup h3 {
-	color: var(--dark);
-	margin-bottom: 16px;
-	font-weight: 400;
-	text-transform: uppercase;
-} */
 
 .add-todo-input {
 	appearance: none;
