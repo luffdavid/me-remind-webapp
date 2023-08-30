@@ -103,7 +103,6 @@ h4 {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	width: 64px;
 	height: 64px;
 	border-radius: 999px;
@@ -115,19 +114,7 @@ h4 {
 	cursor: pointer;
 }
 
-.popup {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 
-	width: 100%;
-	max-width: 400px;
-	background-color: var(--light);
-	padding: 32px;
-	border-radius: 16px;
-	box-shadow: 0px 4px 32px var(--dark);
-}
 
 .closePopup {
 	position: absolute;
@@ -145,7 +132,7 @@ h4 {
 	margin-bottom: 16px;
 	font-weight: 400;
 	text-transform: uppercase;
-}
+} */
 
 .add-todo-input {
 	appearance: none;
