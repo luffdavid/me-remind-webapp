@@ -72,9 +72,17 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
 
       return (
         <div>
-          {isLoading ? (
-            <CircularProgress sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }} />
-          ) : (
+           {isLoading ?
+      <div style={{textAlign:'center'}}>
+        <div className="loading" style={{display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+        }}>
+          <p><CircularProgress sx={{color:'white'}} /> </p>
+          </div>
+          
+        </div> 
+        : (
             <div>
               <h1>{title}</h1>
               <h4>Your Reminders</h4>
