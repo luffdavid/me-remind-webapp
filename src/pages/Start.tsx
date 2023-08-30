@@ -70,28 +70,6 @@ const Start = () => {
     <div>
         <h1>Welcome, $username</h1>
 		<StartCards />
-			<h4>Your Reminders</h4>
-
-			{/* <div className="todos">
-				{todos.length > 0 ? todos.map(todo => (
-					<div className={
-						"todo" + (todo.complete ? " is-complete" : "")
-					} key={todo._id} onClick={() => completeTodo(todo._id)}>
-					<div className="checkbox">
-						{todo.complete ? <Icons.CheckCircleIcon /> : <Icons.CircleIcon />}
-					</div>
-
-						<div className="text">{todo.text}</div>
-						<div className="text">{todo.description}</div>
-						<div className="text">.........{todo.dueDate.toString()}</div>
-
-						<div className="delete-todo" onClick={() => handleDeleteTodo(todo._id)}><Icons.DeleteForeverIcon sx={{color:'red'}}/></div>
-					</div>
-				)) : (
-					<p>You currently have no tasks</p>
-				)}
-			</div> */}
-
 		    <div className="addPopup" onClick={handleOpen}>+</div>
 				 <Modal
 				 open={open}
