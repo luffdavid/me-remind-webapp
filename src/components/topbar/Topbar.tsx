@@ -11,7 +11,7 @@ const Topbar = () => {
         {/* <h2 className='heading'>ME Remind</h2> */}
       </div>
       <div className="avatar">
-        <Avatar alt="User Avatar" src="/path-to-avatar-image.jpg" /> {/* Passe den Avatar-Pfad an */}
+        <Avatar alt="User Avatar" src="/path-to-avatar-image.jpg" /> 
       </div>
     </div>
     <hr style={{opacity:'0.4'}}/>

@@ -10,7 +10,7 @@
     border-radius: 16px;
     display: flex;
     height: 20vh;
-    width: 65vh;
+    width: 65vh;    
     align-items: flex-start;
     justify-content: space-between;
     transition: 0.5s;
@@ -19,7 +19,12 @@
     color: white;
     position: relative;
   }
-  
+  @media (max-width: 950px) { /* Beispiel-Breite für Tablets, passe dies an deine Bedürfnisse an */
+    .card {
+      width: 60vw; /* Setze die Breite auf 80% der Bildschirmbreite */
+      /* Andere Anpassungen für das Erscheinungsbild bei kleiner Bildschirmgröße */
+    }
+  }
   .card-icon {
     /* font-size: 32px; */
     position: absolute;

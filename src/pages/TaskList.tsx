@@ -18,12 +18,22 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  
+  // Filter für abgeschlossene und unvollständige Aufgaben
+  const completedTasks = todos.filter((todo) => todo.complete);
+  const incompletedTasks = todos.filter((todo) => !todo.complete);
+
     // GET ALL TODOS
     const loadTodos = async () => {
         try {
           const response = await getTodos();
           setTodos(response);
+          if (taskType === 'COMPLETE') {
+            console.log("Filter" + taskType);
+            setTodos(response.filter((todo) => todo.complete));
+          } else if( taskType === 'INCOMPLETE') {
+            console.log("Filter: " + taskType);
+            setTodos(response.filter((todo) => !todo.complete));
+          }
         } catch (error) {
           console.error('Error:', error);
         }
@@ -51,56 +61,36 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
         }
       };
 
-    return (
-        //<div>
-        //    <h1>{title}</h1>
-        //    <h4>Your Reminders</h4> 
-        //    <div className="todos">
-		//		{todos.length > 0 ? todos.map(todo => (
-		//			<div className={
-		//				"todo" + (todo.complete ? " is-complete" : "")
-		//			} key={todo._id} onClick={() => completeTodo(todo._id)}>
-		//			<div className="checkbox">
-		//				{todo.complete ? <Icons.CheckCircleIcon /> : <Icons.CircleIcon />}
-		//			</div>
- //
-		//				<div className="text">{todo.text}</div> */}
-        //                <div className="text">TODOTEXT</div>
-		//				{/* <div className="text">{todo.description}</div> */}
-        //                <div className="text">todo.description</div>
-        //                {/* <div className="text">.........{todo.dueDate.toString()}</div> */}
-        //                <div className="text">.........30.08.2023</div>
-//
-		//				<div className="delete-todo" onClick={() => handleDeleteTodo(todo._id)}><Icons.DeleteForeverIcon sx={{color:'red'}}/></div>
-		//			</div>
-		//		)) : (
-		//			<p>You currently have no <span>{taskType.toLowerCase()}</span>  tasks</p>
-		//		)}
-		//	</div>
-        //</div>
+
+    
+    
+
+  return (
         <div>
-            <h1>{title}</h1>
-            <h4>Your Reminders</h4> 
-            <div className="todos">
-                <div className="todo">
-                <div className="todo-duedate">30.08.2023</div> <br />
-                    <div className="checkbox"><Icons.CircleIcon /></div>
-                    <div className="text">To do Title</div>
-                    {/* <div className="description">todo.description</div> */}                    
-                    <div className="delete-todo"><Icons.DeleteForeverIcon sx={{color:'red'}}/></div>	
+          <h1>{title}</h1>
+          <h4>Your Reminders</h4> 
+           <div className="todos">
+            {todos.length > 0 ? todos.map(todo => (
+            <div 
+              className={"todo" + (todo.complete ? " is-complete" : "")} 
+              key={todo._id}
+              onClick={() => completeTodo(todo._id)}>
+                
+                <div className="checkbox">
+                  {todo.complete ? <Icons.CheckCircleIcon /> : <Icons.CircleIcon />}
                 </div>
-                <div className="todo">
-                <div className="todo-duedate">30.08.2023</div> <br />
-                    <div className="checkbox"><Icons.CircleIcon /></div>
-                    <div className="text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Quam blanditiis repellendus dolor harum maiores nihil ut doloribus iusto ipsam
-                      perspiciatis in vel quia, eligendi provident. Magnam ipsam iure nam architecto!s <br />
-                      <span className='description'>aaaaaaaaa</span></div> <br />
-                    {/* <div className="text">todo.description</div>                     */}
-                    <div className="delete-todo"><Icons.DeleteForeverIcon sx={{color:'red'}}/></div>	
+                
+                <div className="todo-duedate">{todo.dueDate}</div> <br />
+                    <div className="text">{todo.text} <br />
+                    <span className='description'>{todo.description}</span></div> <br />
+                    	
+                <div className="delete-todo" onClick={() => handleDeleteTodo(todo._id)}><Icons.DeleteForeverIcon sx={{color:'red'}}/></div>
                 </div>
-            </div>
-       </div>
+				)) : (
+					<p>You currently have no <span>{taskType.toLowerCase()}</span>  tasks</p>
+				)}
+			</div>
+    </div>
     );
 };
 
