@@ -59,6 +59,7 @@ const AddButton = () => {
 				   </Typography>
 				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
 				   <Input
+                   sx={{backgroundColor:'lightblue'}}
 				    type="date"
 					onChange={e => setDueDate(e.target.value)} 
 					value={dueDate}
