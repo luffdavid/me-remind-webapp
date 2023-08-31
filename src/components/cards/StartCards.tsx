@@ -1,4 +1,5 @@
 import  {useEffect, useState} from 'react'
+import { Alert, AlertTitle,  Backdrop,  CircularProgress,  Snackbar, } from '@mui/material'
 import Icons from '../icons/MuiIcons'
 import './StartCards.css'
 import {Link} from 'react-router-dom'
@@ -14,7 +15,7 @@ const [incompletedTodos , setIncompletedTodos] = useState<TodoInterface[]>([]);
 const [overdueTodos,setOverdueTodos] = useState<TodoInterface[]>([])
 const [completedTodos ,setCompletedTodos] = useState<TodoInterface[]>([])
 const [todayTodos ,setTodayTodos] = useState<TodoInterface[]>([])
-
+const [isErrorOpen, setIsErrorOpen] = useState(false);
 useEffect(() => {
   loadTodos();
 }, []);
@@ -25,7 +26,7 @@ useEffect(() => {
         try {
           const response = await getTodos();
           setTodos(response);
-
+          setIsLoading(false);
           setIncompletedTodos(response.filter((todo) => !todo.complete));
           setOverdueTodos(response.filter((todo) => {
                        const dueDate = new Date(todo.dueDate);
@@ -38,14 +39,32 @@ useEffect(() => {
                  dueDate.setHours(0, 0, 0, 0); // Setze die Uhrzeit auf Mitternacht
                  return !todo.complete && dueDate.getTime() === DATE_TODAY;
              }))}
-          //  setIsLoading(false);
           catch (error) {
           setIsLoading(false);
+          setIsErrorOpen(true);
+          setTimeout(() => {
+            setIsErrorOpen(false);
+          }, 100000); // Close error alert after 10 seconds
           console.error('Error:', error); 
         }
       };
 
     return (
+      <div> 
+         {isLoading && (
+          <div style={{textAlign:'center'}}>
+        <div className="loading" style={{display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+        }}>
+          <Backdrop
+  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+  open={isLoading}
+>          <p><CircularProgress sx={{color:'white'}} /> </p></Backdrop>
+
+        </div>
+        </div>
+         )}
       <div className="card-container">
         <div>
           <Link to="/incomplete-tasks" style={{textDecoration:'none'}}>
@@ -88,6 +107,18 @@ useEffect(() => {
          </Link>
        </div>
       </div>
-    )
-  }
+      {isErrorOpen && (
+        <div>
+           <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
+        <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
+          <AlertTitle>Error while loading the data from the server</AlertTitle>
+          Please try again!
+        </Alert>
+      </Snackbar>
+        </div>
+        
+        )}
+        </div>
+        )
+      }
   

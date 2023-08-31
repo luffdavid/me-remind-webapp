@@ -5,11 +5,14 @@ import { getTodos, completeTodo, addNewTodo, deleteTodo } from '../services/requ
 import { DATE_TODAY, api_base } from '../services/constants/Constants';
 import Icons from '../components/icons/MuiIcons';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Alert, AlertTitle, Snackbar } from '@mui/material';
 
 const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
     const [expanded, setExpanded] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isErrorOpen, setIsErrorOpen] = useState(false);
+
     useEffect(() => {
         loadTodos();
 	}, []);
@@ -44,6 +47,11 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
             }))}
           setIsLoading(false);
       } catch (error) {
+        setIsErrorOpen(true);
+        setTimeout(() => {
+          setIsErrorOpen(false);
+        }, 100000); // Close error alert after 10 seconds
+
           setIsLoading(false);
           console.error('Error:', error); 
         }
@@ -76,6 +84,18 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     
 
       return (
+        <div>
+ {isErrorOpen && (
+          <div>
+             <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
+          <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
+            <AlertTitle>Error while loading the data from the server</AlertTitle>
+            Please try again!
+          </Alert>
+        </Snackbar>
+          </div>
+          
+          )}
         <div>
            {isLoading ?
       <div style={{textAlign:'center'}}>
@@ -122,6 +142,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
             </div>
           )}
         </div>
+      </div>
       );
     };
     

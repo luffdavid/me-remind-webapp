@@ -1,5 +1,3 @@
-// Je nachdem, ob du dich in einer Entwicklungs- oder Produktionsumgebung befindest,
-// setzt du die entsprechende API-Basis-URL.
 let api_base = '';
 
 if (process.env.NODE_ENV === 'production') {

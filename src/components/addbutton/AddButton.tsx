@@ -1,8 +1,9 @@
-import { Box, Button, Input, Modal, Typography } from '@mui/material'
+import { Alert, AlertTitle, Box, Button, Input, Modal, Snackbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { ModalStyle } from '../../styles/ModalStyle'
 import { TodoInterface } from '../../services/interfaces/TodoInterface';
 import { addNewTodo } from '../../services/requests/TodoRequests';
+import Icons from '../icons/MuiIcons';
 
 const AddButton = () => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -10,6 +11,8 @@ const AddButton = () => {
 	const [dueDate, setDueDate] = useState("");
 	const [description, setDescription] = useState("");
 	const [open, setOpen] = React.useState(false);
+    const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+    const [isErrorOpen, setIsErrorOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
@@ -19,12 +22,21 @@ const AddButton = () => {
           setTodos([...todos, newTodoData]);
 		  handleClose();
           setNewTodo('');
+          setIsSuccessOpen(true);
+          setTimeout(() => {
+            setIsSuccessOpen(false);
+          }, 60000); // Close success alert after 10 seconds
         } catch (error) {
           console.error('Error:', error);
+          setIsErrorOpen(true);
+          setTimeout(() => {
+            setIsErrorOpen(false);
+          }, 60000); // Close error alert after 10 seconds
         }
       };
 
   return (
+   <>
     <div>
          <div className="addPopup" onClick={handleOpen}>+</div>
          <Modal
@@ -78,6 +90,24 @@ const AddButton = () => {
 				 </Box>
 			   </Modal>
             </div>
+            {isSuccessOpen && (
+      <Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
+        <Alert onClose={() => setIsSuccessOpen(false)} severity="success" >
+          <AlertTitle>Success</AlertTitle>
+         Reminder succesfully saved
+        </Alert>
+      </Snackbar>
+   )}
+
+{isErrorOpen && (
+    <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
+    <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
+      <AlertTitle>Error: Adding a new Reminder wasn't successfully </AlertTitle>
+      Please try again!
+    </Alert>
+  </Snackbar>
+   )}
+   </>
   )
 }
 
