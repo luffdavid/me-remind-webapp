@@ -44,7 +44,7 @@ useEffect(() => {
           setIsErrorOpen(true);
           setTimeout(() => {
             setIsErrorOpen(false);
-          }, 100000); // Close error alert after 10 seconds
+          }, 10000); // Close error alert after 10 seconds
           console.error('Error:', error); 
         }
       };

@@ -123,6 +123,7 @@ h4 {
 	background-color: var(--primary);
 	background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
 	cursor: pointer;
+	z-index: 2;
 }
 
 .add-todo-input {
@@ -148,5 +149,5 @@ h4 {
 	margin-top: 16px;
 	text-align: center;
 	cursor: pointer;
-	z-index: 1;
+	z-index: 2;
 }
