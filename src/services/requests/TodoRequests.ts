@@ -19,3 +19,4 @@ export const addNewTodo = async (newTodo: string, dueDate: string | Date, descri
 export const deleteTodo = async (id: string): Promise<void> => {
   await axios.delete(`${api_base}/todo/delete/${id}`);
 };
+

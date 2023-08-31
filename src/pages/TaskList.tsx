@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {TaskListInterface} from '../services/interfaces/TaskListInterface';
 import { TodoInterface } from '../services/interfaces/TodoInterface';
 import { getTodos, completeTodo, addNewTodo, deleteTodo } from '../services/requests/TodoRequests'; 
-import { api_base } from '../services/constants/Constants';
+import { DATE_TODAY, api_base } from '../services/constants/Constants';
 import Icons from '../components/icons/MuiIcons';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -19,10 +19,6 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  // Filter für abgeschlossene und unvollständige Aufgaben
-  const completedTasks = todos.filter((todo) => todo.complete);
-  const incompletedTasks = todos.filter((todo) => !todo.complete);
-
     // GET ALL TODOS
     const loadTodos = async () => {
       setIsLoading(true);
@@ -35,12 +31,21 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
           } else if( taskType === 'INCOMPLETE') {
             console.log("Filter: " + taskType);
             setTodos(response.filter((todo) => !todo.complete));
-          }
+          } else if (taskType === 'OVERDUE') {
+            console.log("Filter: " + taskType);
+            setTodos(response.filter((todo) => {
+              const dueDate = new Date(todo.dueDate);
+              return !todo.complete && dueDate.getTime() < DATE_TODAY;
+            }))} else {
+              setTodos(response.filter((todo) => {
+                const dueDate = new Date(todo.dueDate);
+                dueDate.setHours(0, 0, 0, 0); // Setze die Uhrzeit auf Mitternacht
+                return !todo.complete && dueDate.getTime() === DATE_TODAY;
+            }))}
           setIsLoading(false);
-        } catch (error) {
+      } catch (error) {
           setIsLoading(false);
-          console.error('Error:', error);
-          
+          console.error('Error:', error); 
         }
       };
 
