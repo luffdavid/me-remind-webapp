@@ -3,12 +3,14 @@ import Start from './pages/Start';
 import Topbar from './components/topbar/Topbar';
 import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-dom'
 import TaskList from './pages/TaskList';
+import AddButton from './components/addbutton/AddButton';
 
 function App() {
 	return (
 		<>
 			<Topbar />
 		<div className="App">
+			<AddButton />
 		<BrowserRouter>
 		<Routes>
 			<Route
