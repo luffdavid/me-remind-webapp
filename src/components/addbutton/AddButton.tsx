@@ -8,7 +8,7 @@ import Icons from '../icons/MuiIcons';
 const AddButton = () => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
 	const [newTodo, setNewTodo] = useState("");
-	const [dueDate, setDueDate] = useState("");
+	const [dueDate, setDueDate] = useState(new Date().toLocaleDateString('en-EN'));
 	const [description, setDescription] = useState("");
 	const [open, setOpen] = React.useState(false);
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
@@ -60,7 +60,7 @@ const AddButton = () => {
 				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
 				   <Input
                    sx={{backgroundColor:'lightblue'}}
-				    type="date"
+				    // type="date"
 					onChange={e => setDueDate(e.target.value)} 
 					value={dueDate}
 					color='primary'
