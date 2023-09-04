@@ -1,0 +1,9 @@
+{
+    "modalHeading":"Neuen REMINDER hinzufügen",
+    "reminderTitle":"Name des Reminders",
+    "titlePlaceholder": "An was soll erinnert werden?",
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Falls benötigt fügen Sie hier eine Beschreibung hinzu",
+    "cancelBtn": "Abbrechen",
+    "createBtn": "Speichern"
+}

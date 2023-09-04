@@ -1,0 +1,9 @@
+{
+    "modalHeading":"Add a new REMINDER",
+    "reminderTitle":"Reminder title",
+    "titlePlaceholder": "How do you want to name your reminder?",
+    "description": "Description",
+    "descriptionPlaceholder": "If needed take some additional input here",
+    "cancelBtn": "Cancel",
+    "createBtn": "Create task"
+}

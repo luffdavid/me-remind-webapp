@@ -9,6 +9,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useTranslation } from 'react-i18next';
 
 const AddButton = () => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -22,6 +23,7 @@ const AddButton = () => {
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	const { t, i18n } = useTranslation(['addButton']);
 
     const handleAddTodo = async () => {
         try {
@@ -62,18 +64,18 @@ const AddButton = () => {
 			   >
 				 <Box sx={ModalStyle}>
 				   <Typography id="modal-modal-title" variant="h6" component="h2" sx={{color: 'black'}}>
-					 Add a new REMINDER
+				   {t("modalHeading", {ns: ['addButton']})}
 				   </Typography>
 				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
 				   <TextField
-				    label="Reminder title"
+				    label={t("reminderTitle", {ns: ['addButton']})}
 					fullWidth
 					required
 				    type="text"
 					onChange={e => setNewTodo(e.target.value)}
 					value={newTodo} 
 					color='primary'
-					placeholder='How do you want to name your reminder?'/>
+					placeholder={t("titlePlaceholder", {ns: ['addButton']})}/>
 				   </Typography>
 				   <LocalizationProvider dateAdapter={AdapterDayjs}>
 					<DemoContainer components={['DatePicker']}>
@@ -86,25 +88,28 @@ const AddButton = () => {
 				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
 				   <TextField
 				   	fullWidth
-				    label="Description"
+				    label={t("description", {ns: ['addButton']})}
 				    type="string"
 					multiline
 					onChange={e => setDescription(e.target.value)} 
 					value={description}
 					color='primary'
-					placeholder='If needed take some additional input here'/>
+					placeholder={t("descriptionPlaceholder", {ns: ['addButton']})}
+					/>
 				   </Typography> <br />
 				   <Typography sx={{textAlign:'right'}}>
 				   <Button
 				   sx={{marginRight:'6px'}}
 				   onClick={handleClose}
 					color='primary'
-					variant='outlined'>Cancel
+					variant='outlined'>
+						{t("cancelBtn", {ns: ['addButton']})}
 					</Button> 
 				   <Button
 				    onClick={handleAddTodo}
 					color='primary'
-					variant='contained'>Create Task
+					variant='contained'>
+						{t("createBtn", {ns: ['addButton']})}
 					</Button>
 				</Typography>
 				 </Box>

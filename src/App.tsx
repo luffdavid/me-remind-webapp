@@ -8,7 +8,7 @@ import AddButton from './components/addbutton/AddButton';
 function App() {
 	return (
 		<>
-			<Topbar />
+		<Topbar />
 		<div className="App">
 			<AddButton />
 		<BrowserRouter>
