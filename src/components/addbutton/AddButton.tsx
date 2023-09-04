@@ -17,6 +17,7 @@ const AddButton = () => {
 	const [open, setOpen] = React.useState(false);
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
+	const [errorText, setErrorText] = useState("");
 	const [dueDate, setDueDate] = React.useState<Dayjs | null>(null);
 
 	const handleOpen = () => setOpen(true);
@@ -24,6 +25,13 @@ const AddButton = () => {
 
     const handleAddTodo = async () => {
         try {
+			if (newTodo === "" || !dueDate?.isValid) {
+				setErrorText("Please fill in all fields");
+				setIsErrorOpen(true);
+				setTimeout(() => {
+				  setIsErrorOpen(false);
+				}, 60000); 
+			}
           const newTodoData = await addNewTodo(newTodo, dueDate, description);
           setTodos([...todos, newTodoData]);
 		  handleClose();
@@ -34,6 +42,7 @@ const AddButton = () => {
           }, 60000); // Close success alert after 10 seconds
         } catch (error) {
           console.error('Error:', error);
+		  setErrorText('Error:'+ error);
           setIsErrorOpen(true);
           setTimeout(() => {
             setIsErrorOpen(false);
@@ -114,7 +123,7 @@ const AddButton = () => {
     <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
     <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
       <AlertTitle>Error: Adding a new Reminder wasn't successfully </AlertTitle>
-      Please try again!
+	  {errorText} 
     </Alert>
   </Snackbar>
    )}

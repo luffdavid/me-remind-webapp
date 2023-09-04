@@ -16,6 +16,8 @@ const [overdueTodos,setOverdueTodos] = useState<TodoInterface[]>([])
 const [completedTodos ,setCompletedTodos] = useState<TodoInterface[]>([])
 const [todayTodos ,setTodayTodos] = useState<TodoInterface[]>([])
 const [isErrorOpen, setIsErrorOpen] = useState(false);
+const [errorText, setErrorText] = useState("");
+
 useEffect(() => {
   loadTodos();
 }, []);
@@ -41,11 +43,12 @@ useEffect(() => {
              }))}
           catch (error) {
           setIsLoading(false);
+          setErrorText('Error' + error);
           setIsErrorOpen(true);
           setTimeout(() => {
             setIsErrorOpen(false);
           }, 10000); // Close error alert after 10 seconds
-          console.error('Error:', error); 
+          console.error('Error: ', error); 
         }
       };
 
@@ -112,7 +115,7 @@ useEffect(() => {
            <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
         <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
           <AlertTitle>Error while loading the data from the server</AlertTitle>
-          Please try again!
+          {errorText}
         </Alert>
       </Snackbar>
         </div>

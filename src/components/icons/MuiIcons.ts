@@ -7,6 +7,7 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import ErrorIcon from '@mui/icons-material/Error';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const Icons = {
   DeleteForeverIcon,
@@ -16,7 +17,8 @@ const Icons = {
   WatchLaterIcon,
   TaskAltIcon,
   UnpublishedIcon,
-  ErrorIcon
+  ErrorIcon,
+  RefreshIcon
 };
 
 export default Icons;
