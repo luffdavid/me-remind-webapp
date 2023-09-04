@@ -122,7 +122,13 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
                       <div className="checkbox">
                         {todo.complete ? <Icons.CheckCircleIcon /> : <Icons.CircleIcon />}
                       </div>
-                      <div className="todo-duedate">{todo.dueDate}</div>
+                      <div className="todo-duedate">
+                        <>
+                        Due: 
+                        {new Date(todo.dueDate).toLocaleDateString('de-DE')}
+                        </>
+                        {/* {todo.dueDate} */}
+                        </div>
                       <div className="text">
                         {todo.text} <br />
                         <span className="description">{todo.description}</span>

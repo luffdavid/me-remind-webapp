@@ -1,18 +1,24 @@
-import { Alert, AlertTitle, Box, Button, Input, Modal, Snackbar, Typography } from '@mui/material'
+import { Alert, AlertTitle, Box, Button, Input, Modal, Snackbar, Typography, TextField} from '@mui/material'
 import React, { useState } from 'react'
 import { ModalStyle } from '../../styles/ModalStyle'
 import { TodoInterface } from '../../services/interfaces/TodoInterface';
 import { addNewTodo } from '../../services/requests/TodoRequests';
-import Icons from '../icons/MuiIcons';
+import { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const AddButton = () => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
 	const [newTodo, setNewTodo] = useState("");
-	const [dueDate, setDueDate] = useState(new Date().toLocaleDateString('en-EN'));
 	const [description, setDescription] = useState("");
 	const [open, setOpen] = React.useState(false);
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
+	const [dueDate, setDueDate] = React.useState<Dayjs | null>(null);
+
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
@@ -50,30 +56,34 @@ const AddButton = () => {
 					 Add a new REMINDER
 				   </Typography>
 				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-				   <Input
+				   <TextField
+				    label="Reminder title"
+					fullWidth
+					required
 				    type="text"
 					onChange={e => setNewTodo(e.target.value)}
 					value={newTodo} 
 					color='primary'
-					placeholder='Reminder title'/>
+					placeholder='How do you want to name your reminder?'/>
 				   </Typography>
+				   <LocalizationProvider dateAdapter={AdapterDayjs}>
+					<DemoContainer components={['DatePicker']}>
+						<DatePicker
+						value={dueDate}
+						onChange={(newValue) => setDueDate(newValue)}/>
+					</DemoContainer>
+				   </LocalizationProvider>
+
 				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-				   <Input
-                   sx={{backgroundColor:'lightblue'}}
-				    // type="date"
-					onChange={e => setDueDate(e.target.value)} 
-					value={dueDate}
-					color='primary'
-					placeholder='Due date dd.mm.yyyy'/>
-				   </Typography>
-				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-				   <Input
+				   <TextField
+				   	fullWidth
+				    label="Description"
 				    type="string"
 					multiline
 					onChange={e => setDescription(e.target.value)} 
 					value={description}
 					color='primary'
-					placeholder='Description'/>
+					placeholder='If needed take some additional input here'/>
 				   </Typography> <br />
 				   <Typography sx={{textAlign:'right'}}>
 				   <Button
