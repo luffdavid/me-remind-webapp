@@ -6,12 +6,14 @@ import { DATE_TODAY, api_base } from '../services/constants/Constants';
 import Icons from '../components/icons/MuiIcons';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Alert, AlertTitle, Snackbar } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
     const [expanded, setExpanded] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
+    const { t, i18n } = useTranslation(['tasklist']);
 
     useEffect(() => {
         loadTodos();
@@ -29,7 +31,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
           const response = await getTodos();
           setTodos(response);
           if (taskType === 'COMPLETE') {
-            console.log("Filter" + taskType);
+            console.log("Filter: " + taskType);
             setTodos(response.filter((todo) => todo.complete));
           } else if( taskType === 'INCOMPLETE') {
             console.log("Filter: " + taskType);
@@ -79,18 +81,14 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
         }
       };
 
-
-    
-    
-
       return (
         <div>
  {isErrorOpen && (
           <div>
              <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
           <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
-            <AlertTitle>Error while loading the data from the server</AlertTitle>
-            Please try again!
+            <AlertTitle>{t("alertError", {ns: ['tasklist']})} </AlertTitle>
+            {t("alertTryAgain", {ns: ['tasklist']})}
           </Alert>
         </Snackbar>
           </div>
@@ -110,7 +108,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
         : (
             <div>
               <h1>{title}</h1>
-              <h4>Your Reminders</h4>
+              <h4>{t("yourReminders", {ns: ['tasklist']})}</h4>
               <div className="todos">
                 {todos.length > 0 ? (
                   todos.map((todo) => (
@@ -124,7 +122,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
                       </div>
                       <div className="todo-duedate">
                         <>
-                        Due: 
+                        {t("", {ns: ['tasklist']})} 
                         {new Date(todo.dueDate).toLocaleDateString('de-DE')}
                         </>
                         {/* {todo.dueDate} */}
@@ -142,7 +140,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
                     </div>
                   ))
                 ) : (
-                  <p>You currently have no {taskType.toLowerCase()} tasks</p>
+                  <p>{t("noTasksMsg", {ns: ['tasklist']})}</p>
                 )}
               </div>
             </div>

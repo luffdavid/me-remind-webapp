@@ -1,0 +1,8 @@
+{
+    "alertError":"Error while loading the data from the server",
+    "alertTryAgain":"Please try again",
+    "yourReminders": "Your Reminders",
+    "due":"Due:",
+    "localLanguage":"en-EN",
+    "noTasksMsg": "You currently have no tasks"
+}

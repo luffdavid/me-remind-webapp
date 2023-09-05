@@ -5,8 +5,16 @@ import Icons from '../icons/MuiIcons';
 import { useTranslation } from "react-i18next";
 import './Topbar.css'
 import { Select, MenuItem } from '@mui/material';
+import ReactCountryFlag from "react-country-flag";
 
 const Topbar = () => {
+
+
+  const languages = [
+    { code: 'en', name: 'English', flag: 'GB' },
+    { code: 'de', name: 'German', flag: 'DE' },
+    // Fügen Sie hier weitere Sprachen mit ihren Flaggen hinzu
+  ];
 
   const { t, i18n } = useTranslation(['home']);
 
@@ -17,6 +25,7 @@ const Topbar = () => {
   const onClickLanguageChange = (e: any) => {
     const language = e.target.value;
     i18n.changeLanguage(language); //change the language
+    localStorage.setItem('language', language); // de , en
 }
   return (
     <>
@@ -32,13 +41,15 @@ const Topbar = () => {
         <div className='languageSettings'>
         <Select
         className="custom-select"
-        defaultValue={"English"}
-        sx={{color:'white'}}
-        style={{ width: 200 }}
+        value={i18n.language}
+        style={{ borderStyle:'none' }}
         onChange={onClickLanguageChange}
       >
-        <MenuItem value="en">English</MenuItem>
-        <MenuItem value="de">German</MenuItem>
+        {languages.map((language) => (
+          <MenuItem key={language.code} value={language.code}>
+            <ReactCountryFlag countryCode={language.flag} svg />
+          </MenuItem>
+        ))}
       </Select>
         </div>
         <Avatar alt="Username"  src="/path-to-avatar-image.jpg" /> 

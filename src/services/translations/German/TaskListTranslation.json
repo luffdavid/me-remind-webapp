@@ -1,0 +1,8 @@
+{
+    "alertError":"Fehler beim Laden der Daten vom Server",
+    "alertTryAgain":"Versuchen Sie es in ein paar Minuten nocheinmal",
+    "yourReminders": "Deine Reminders",
+    "due":"Fällig am: ",
+    "localLanguage":"de-DE",
+    "noTasksMsg": "Du hast momentan keine Aufgaben!"
+}

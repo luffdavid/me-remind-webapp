@@ -20,15 +20,19 @@ const AddButton = () => {
     const [isErrorOpen, setIsErrorOpen] = useState(false);
 	const [errorText, setErrorText] = useState("");
 	const [dueDate, setDueDate] = React.useState<Dayjs | null>(null);
+	const currentDate = new Date();
 
+	// Ziehen Sie einen Tag von der aktuellen Datum und Uhrzeit ab, um das Datum von gestern zu erhalten
+	const yesterdayDate = new Date(currentDate);
+	yesterdayDate.setDate(currentDate.getDate() - 1);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const { t, i18n } = useTranslation(['addButton']);
 
     const handleAddTodo = async () => {
         try {
-			if (newTodo === "" || !dueDate?.isValid) {
-				setErrorText("Please fill in all fields");
+			if (newTodo === "" || !dueDate?.isValid ||  dayjs(dueDate).isBefore(yesterdayDate)) {
+				setErrorText("Please fill in all fields and make sure the due date is in the future");
 				setIsErrorOpen(true);
 				setTimeout(() => {
 				  setIsErrorOpen(false);

@@ -4,8 +4,10 @@ import Topbar from './components/topbar/Topbar';
 import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-dom'
 import TaskList from './pages/TaskList';
 import AddButton from './components/addbutton/AddButton';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+	const { t, i18n } = useTranslation(['start']);
 	return (
 		<>
 		<Topbar />
@@ -18,16 +20,16 @@ function App() {
 			element={ <Start />}
 			/>
 			<Route path="/incomplete-tasks"
-			element={<TaskList title="All Incomplete Tasks"  taskType='INCOMPLETE'/>}
+			element={<TaskList title={t("incomplete", {ns: ['start']})}   taskType='INCOMPLETE'/>}
 			/>
            <Route path="/due-today-tasks"
-			element={<TaskList title="Tasks Due today" taskType='TODAY'/>}
+			element={<TaskList title={t("today", {ns: ['start']})} taskType='TODAY'/>}
 			/>
 			 <Route path="/overdue-tasks"
-			element={<TaskList title="Overdue Tasks"  taskType='OVERDUE'/>}
+			element={<TaskList title={t("overdue", {ns: ['start']})}  taskType='OVERDUE'/>}
 			/>
 			<Route path="/completed-tasks"
-			element={<TaskList title="Completed Tasks" taskType='COMPLETE'/>}
+			element={<TaskList title={t("completed", {ns: ['start']})} taskType='COMPLETE'/>}
 			/>
 		</Routes>
 		</BrowserRouter>
