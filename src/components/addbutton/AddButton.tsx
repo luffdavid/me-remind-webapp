@@ -1,6 +1,6 @@
-import { Alert, AlertTitle, Box, Button, Input, Modal, Snackbar, Typography, TextField} from '@mui/material'
-import React, { useState } from 'react'
-import { ModalStyle } from '../../styles/ModalStyle'
+import React, { useState } from 'react';
+import { Alert, AlertTitle, Box, Button, Modal, Snackbar, Typography, TextField} from '@mui/material'
+import { ModalStyle } from '../../styles/ModalStyle';
 import { TodoInterface } from '../../services/interfaces/TodoInterface';
 import { addNewTodo } from '../../services/requests/TodoRequests';
 import { Dayjs } from 'dayjs';
@@ -11,133 +11,155 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTranslation } from 'react-i18next';
 
-const AddButton = () => {
-    const [todos, setTodos] = useState<TodoInterface[]>([]);
-	const [newTodo, setNewTodo] = useState("");
-	const [description, setDescription] = useState("");
-	const [open, setOpen] = React.useState(false);
-    const [isSuccessOpen, setIsSuccessOpen] = useState(false);
-    const [isErrorOpen, setIsErrorOpen] = useState(false);
-	const [errorText, setErrorText] = useState("");
-	const [dueDate, setDueDate] = React.useState<Dayjs | null>(null);
-	const currentDate = new Date();
+const AddButton: React.FC = () => {
+  const [todos, setTodos] = useState<TodoInterface[]>([]);
+  const [newTodo, setNewTodo] = useState("");
+  const [description, setDescription] = useState("");
+  const [open, setOpen] = useState(false);
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
+  const [errorText, setErrorText] = useState("");
+  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
+  const currentDate = new Date();
+  const yesterdayDate = new Date(currentDate);
+  yesterdayDate.setDate(currentDate.getDate() - 1);
+  const { t } = useTranslation(['addButton']);
 
-	// Ziehen Sie einen Tag von der aktuellen Datum und Uhrzeit ab, um das Datum von gestern zu erhalten
-	const yesterdayDate = new Date(currentDate);
-	yesterdayDate.setDate(currentDate.getDate() - 1);
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
-	const { t, i18n } = useTranslation(['addButton']);
+  // Functions
+  const handleOpen = () => {
+	setOpen(true);
+  }
 
-    const handleAddTodo = async () => {
-        try {
-			if (newTodo === "" || !dueDate?.isValid ||  dayjs(dueDate).isBefore(yesterdayDate)) {
-				setErrorText("Please fill in all fields and make sure the due date is in the future");
-				setIsErrorOpen(true);
-				setTimeout(() => {
-				  setIsErrorOpen(false);
-				}, 60000); 
-			}
-          const newTodoData = await addNewTodo(newTodo, dueDate, description);
-          setTodos([...todos, newTodoData]);
-		  handleClose();
-          setNewTodo('');
-          setIsSuccessOpen(true);
-          setTimeout(() => {
-            setIsSuccessOpen(false);
-          }, 60000); // Close success alert after 10 seconds
-        } catch (error) {
-          console.error('Error:', error);
-		  setErrorText('Error:'+ error);
-          setIsErrorOpen(true);
-          setTimeout(() => {
-            setIsErrorOpen(false);
-          }, 60000); // Close error alert after 10 seconds
-        }
-      };
+  const handleClose = () => {
+	setOpen(false);
+  }
+  const handleAddTodo = async () => {
+    try {
+      if (newTodo === ""    ||
+	      !dueDate?.isValid ||
+		  dayjs(dueDate).isBefore(yesterdayDate)) {
+			setErrorText("Please fill in all fields and make sure the due date is in the future");
+			setIsErrorOpen(true);
+			setTimeout(() => {
+				setIsErrorOpen(false);
+			}, 60000);
+		}
+      const newTodoData = await addNewTodo(newTodo, dueDate, description);
+      		setTodos([...todos, newTodoData]);
+      		handleClose();
+      		setNewTodo('');
+      		setIsSuccessOpen(true);
+      		setTimeout(() => {
+				setIsSuccessOpen(false);
+			}, 60000);
+    } catch (error) {
+			console.error('Error:', error);
+			setErrorText('Error:' + error);
+			setIsErrorOpen(true);
+			setTimeout(() => {
+				setIsErrorOpen(false);
+			}, 60000); // Close error alert after 10 seconds
+		}
+	};
 
   return (
-   <>
-    <div>
-         <div className="addPopup" onClick={handleOpen}>+</div>
-         <Modal
-				 open={open}
-				 onClose={handleClose}
-				 aria-labelledby="modal-modal-title"
-				 aria-describedby="modal-modal-description"
-			   >
-				 <Box sx={ModalStyle}>
-				   <Typography id="modal-modal-title" variant="h6" component="h2" sx={{color: 'black'}}>
-				   {t("modalHeading", {ns: ['addButton']})}
-				   </Typography>
-				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-				   <TextField
-				    label={t("reminderTitle", {ns: ['addButton']})}
-					fullWidth
-					required
-				    type="text"
-					onChange={e => setNewTodo(e.target.value)}
-					value={newTodo} 
-					color='primary'
-					placeholder={t("titlePlaceholder", {ns: ['addButton']})}/>
-				   </Typography>
-				   <LocalizationProvider dateAdapter={AdapterDayjs}>
-					<DemoContainer components={['DatePicker']}>
-						<DatePicker
-						value={dueDate}
-						onChange={(newValue) => setDueDate(newValue)}/>
-					</DemoContainer>
-				   </LocalizationProvider>
+  <>
+  	<div>
+		<div className="addPopup" onClick={handleOpen}>+</div>
+			<Modal
+				open={open}
+          		onClose={handleClose}
+          		aria-labelledby="modal-modal-title"
+          		aria-describedby="modal-modal-description"
+			>
+				<Box sx={ModalStyle}>
+					<Typography 
+						id="modal-modal-title" 
+						variant="h6"
+						component="h2"
+						sx={{ color: 'black' }}>
+						{t("modalHeading", { ns: ['addButton'] })}
+					</Typography>
+					
+					 <Typography 
+					 	id="modal-modal-description"
+						sx={{ mt: 2 }}>
+							<TextField
+								label={t("reminderTitle", { ns: ['addButton'] })}
+								fullWidth
+								required
+								type="text"
+								onChange={e => setNewTodo(e.target.value)}value={newTodo}
+								color='primary'
+								placeholder={t("titlePlaceholder", { ns: ['addButton'] })}
+							/>
+					</Typography>
+						
+					<LocalizationProvider dateAdapter={AdapterDayjs}>
+						<DemoContainer components={['DatePicker']}>
+							<DatePicker
+								value={dueDate}
+                  				onChange={(newValue) => setDueDate(newValue)} />
+						</DemoContainer>
+					</LocalizationProvider>
 
-				   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-				   <TextField
-				   	fullWidth
-				    label={t("description", {ns: ['addButton']})}
-				    type="string"
-					multiline
-					onChange={e => setDescription(e.target.value)} 
-					value={description}
-					color='primary'
-					placeholder={t("descriptionPlaceholder", {ns: ['addButton']})}
-					/>
-				   </Typography> <br />
-				   <Typography sx={{textAlign:'right'}}>
-				   <Button
-				   sx={{marginRight:'6px'}}
-				   onClick={handleClose}
-					color='primary'
-					variant='outlined'>
-						{t("cancelBtn", {ns: ['addButton']})}
-					</Button> 
-				   <Button
-				    onClick={handleAddTodo}
-					color='primary'
-					variant='contained'>
-						{t("createBtn", {ns: ['addButton']})}
-					</Button>
-				</Typography>
-				 </Box>
-			   </Modal>
-            </div>
-            {isSuccessOpen && (
-      <Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
-        <Alert onClose={() => setIsSuccessOpen(false)} severity="success" >
-          <AlertTitle>Success</AlertTitle>
-         Reminder succesfully saved
-        </Alert>
-      </Snackbar>
-   )}
+            		<Typography 
+						id="modal-modal-description"
+						sx={{ mt: 2 }}>
+							<TextField
+								fullWidth
+                				label={t("description", { ns: ['addButton'] })}
+                				type="string"
+                				multiline
+                				onChange={e => setDescription(e.target.value)}
+                				value={description}
+                				color='primary'
+                				placeholder={t("descriptionPlaceholder", { ns: ['addButton'] })}
+             				 />
+            		</Typography>
+					 <br />
+            		<Typography 
+						sx={{ textAlign: 'right' }}>
+              				<Button
+                				sx={{ marginRight: '6px' }}
+                				onClick={handleClose}
+                				color='primary'
+                				variant='outlined'>
+                				{t("cancelBtn", { ns: ['addButton'] })}
+              				</Button>
+              				
+							<Button
+                				onClick={handleAddTodo}
+                				color='primary'
+                				variant='contained'>
+                				{t("createBtn", { ns: ['addButton'] })}
+              				</Button>
+            		</Typography>
+				</Box>
+    		</Modal>
+    	</div>
+      
+	  	{isSuccessOpen && (
+		<Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
+          <Alert 
+		  		onClose={() => setIsSuccessOpen(false)} 
+				severity="success" >
+            <AlertTitle>Success</AlertTitle>
+            Reminder successfully saved
+          </Alert>
+        </Snackbar>
+      )}
 
-{isErrorOpen && (
-    <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
-    <Alert  onClose={() => setIsErrorOpen(false)} severity="error" >
-      <AlertTitle>Error: Adding a new Reminder wasn't successfully </AlertTitle>
-	  {errorText} 
-    </Alert>
-  </Snackbar>
-   )}
-   </>
-  )
+      {isErrorOpen && (
+        <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
+          <Alert onClose={() => setIsErrorOpen(false)} severity="error" >
+            <AlertTitle>Error: Adding a new Reminder wasn't successful </AlertTitle>
+            {errorText}
+          </Alert>
+        </Snackbar>
+      )}
+    </>
+  );
 }
 
-export default AddButton
+export default AddButton;

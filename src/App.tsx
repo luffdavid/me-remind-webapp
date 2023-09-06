@@ -5,6 +5,8 @@ import {BrowserRouter, Routes, Route, Navigate, useLocation} from 'react-router-
 import TaskList from './pages/TaskList';
 import AddButton from './components/addbutton/AddButton';
 import { useTranslation } from 'react-i18next';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
 	const { t, i18n } = useTranslation(['start']);
@@ -18,6 +20,14 @@ function App() {
 			<Route
 			path="/"
 			element={ <Start />}
+			/>
+			<Route
+			path="/login"
+			element={ <Login />}
+			/>
+			<Route
+			path="/signup"
+			element={ <Signup />}
 			/>
 			<Route path="/incomplete-tasks"
 			element={<TaskList title={t("incomplete", {ns: ['start']})}   taskType='INCOMPLETE'/>}
