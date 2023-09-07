@@ -5,7 +5,7 @@ import { getTodos, completeTodo, addNewTodo, deleteTodo } from '../services/requ
 import { DATE_TODAY, api_base } from '../services/constants/Constants';
 import Icons from '../components/icons/MuiIcons';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Alert, AlertTitle, Button, Snackbar } from '@mui/material';
+import { Alert, AlertTitle, Button, Skeleton, Snackbar } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -96,16 +96,23 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
           
           )}
         <div>
-           {isLoading ?
-      <div style={{textAlign:'center'}}>
-        <div className="loading" style={{display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-        }}>
-          <p><CircularProgress sx={{color:'white'}} /> </p>
-          </div>
-          
-        </div> 
+           {!isLoading ?
+     <div>
+     <Link 
+         to="/"
+         style={{textDecoration:'none'}}>
+           <Button>Back to overview</Button>
+     </Link>
+     <h1>{title}</h1>
+     <h4>{t("yourReminders", {ns: ['tasklist']})}</h4>
+     <div className="todos">
+           <Skeleton className='todo'  />
+           <Skeleton className='todo'  />
+           <Skeleton className='todo'  />
+           <Skeleton className='todo'  />
+        </div>
+        </div>
+      
         : (
             <div>
               <Link 
