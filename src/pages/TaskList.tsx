@@ -96,7 +96,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
           
           )}
         <div>
-           {!isLoading ?
+           {isLoading ?
      <div>
      <Link 
          to="/"

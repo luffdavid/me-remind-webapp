@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
-import { Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
+import {Alert, AlertTitle, Snackbar, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
+import { login } from '../services/requests/AuthRequests';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Verhindert, dass das Formular standardmäßig gesendet wird
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+    if(!email || !password) {
+      setErrorMsg("Please fill in all fields!");
+      return;
+    }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Hier können Sie die Logik für die Anmeldung implementieren
+    try {
+      await login( email, password);
+      setIsSuccessOpen(true);
+      setTimeout(() => {
+      setIsSuccessOpen(false);
+     }, 60000);
+      // Hier kannst du den Benutzer nach der Registrierung zu einer anderen Seite weiterleiten
+    } catch (error) {
+     setErrorMsg('Error: ' + (error as Error).message);
+			setIsErrorOpen(true);
+			setTimeout(() => {
+				setIsErrorOpen(false);
+			}, 60000); 
+    }
   };
 
   return (
+    <>
     <Container component="main" maxWidth="xs" sx={{border:'1px solid black', padding:'10px'}}>
       <CssBaseline />
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8px' }}>
@@ -32,7 +48,7 @@ function Login() {
             label="E-Mail-Adresse"
             type="email"
             value={email}
-            onChange={handleEmailChange}
+            onChange={ (e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -42,7 +58,7 @@ function Login() {
             label="Passwort"
             type="password"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={ (e) => setPassword(e.target.value)}
           />
           <Button
             type="submit"
@@ -56,6 +72,28 @@ function Login() {
         </form>
       </div>
     </Container>
+
+    {isSuccessOpen && (
+  <Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
+        <Alert 
+        onClose={() => setIsSuccessOpen(false)} 
+      severity="success" >
+          <AlertTitle>Success</AlertTitle>
+         Logged in as {email}
+        </Alert>
+      </Snackbar>
+    )}
+
+    {isErrorOpen && (
+      <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
+        <Alert onClose={() => setIsErrorOpen(false)} severity="error" >
+          <AlertTitle>Error: Logging in wasn't successful</AlertTitle>
+          {errorMsg}
+        </Alert>
+      </Snackbar>
+    )}
+</>
+
   );
 }
 
