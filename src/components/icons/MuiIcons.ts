@@ -8,6 +8,9 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import ErrorIcon from '@mui/icons-material/Error';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import LogoutIcon from '@mui/icons-material/Logout';
+import WestIcon from '@mui/icons-material/West';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
 const Icons = {
   DeleteForeverIcon,
@@ -18,7 +21,11 @@ const Icons = {
   TaskAltIcon,
   UnpublishedIcon,
   ErrorIcon,
-  RefreshIcon
+  RefreshIcon,
+  LogoutIcon,
+  WestIcon,
+  FactCheckOutlinedIcon
+
 };
 
 export default Icons;

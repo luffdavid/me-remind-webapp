@@ -1,34 +1,25 @@
 import React, { useState } from 'react';
-import {Alert, AlertTitle, Snackbar, Button, Container, CssBaseline, TextField, Typography, Backdrop, CircularProgress } from '@mui/material';
+import {Alert, AlertTitle, Snackbar, Button,  TextField, Backdrop, CircularProgress } from '@mui/material';
 import { login } from '../services/requests/AuthRequests';
 import { useTranslation } from 'react-i18next';
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-  MDBIcon,
-  MDBInput,
-  MDBCheckbox
-}
-from 'mdb-react-ui-kit';
+import {MDBContainer,MDBCol,MDBRow }from 'mdb-react-ui-kit';
 
 
 
 function Login() {
-  const [email, setEmail] = useState('');
+
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
     const [isErrorOpen, setIsErrorOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState([]);
-
     const { t } = useTranslation(['auth']);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-         e.preventDefault();
-         try {
+      e.preventDefault();
+        try {
            setIsLoading(true);
            const response =  await login( email, password);
            if(response === "Error") {

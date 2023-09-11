@@ -8,6 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Alert, AlertTitle, Button, Skeleton, Snackbar } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import comletedtasksimg from '../assets/completed-task.png'
 
 const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -101,7 +102,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
      <Link 
          to="/"
          style={{textDecoration:'none'}}>
-           <Button>Back to overview</Button>
+           <Button sx={{color:'white'}}><Icons.WestIcon /></Button>
      </Link>
      <h1>{title}</h1>
      <h4>{t("yourReminders", {ns: ['tasklist']})}</h4>
@@ -118,7 +119,9 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
               <Link 
                   to="/"
                   style={{textDecoration:'none'}}>
-                    <Button>Back to overview</Button>
+                    <Button sx={{color:'white'}}>
+                      <Icons.WestIcon />
+                    </Button>
               </Link>
               <h1>{title}</h1>
               <h4>{t("yourReminders", {ns: ['tasklist']})}</h4>
@@ -153,7 +156,12 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
                     </div>
                   ))
                 ) : (
-                  <p>{t("noTasksMsg", {ns: ['tasklist']})}</p>
+                  <p>
+                    <div style={{textAlign:'center'}}>
+                     <img src={comletedtasksimg} alt='' width="25%" height="auto" /> <br /> <br /><br />
+                     <h3>{t("noTasksMsg", {ns: ['tasklist']})}</h3>
+                    </div>
+                  </p>
                 )}
               </div>
             </div>
