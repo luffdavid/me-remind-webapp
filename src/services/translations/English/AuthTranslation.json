@@ -10,6 +10,7 @@
     "signup": "Sign up",
     "alertMsgRegister": "User account created successfully",
     "errorRegister": "Error: Creating new account wasn't successful",
-    "signupLink": "Don't have an account yet? SIGN UP!"
+    "signupLink": "Don't have an account yet? SIGN UP!",
+    "loginLink": "You have already an account? Login here!"
 
 }

@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import {Alert, AlertTitle, Snackbar, Button, Container, CssBaseline, TextField, Typography, Backdrop, CircularProgress } from '@mui/material';
 import { signup } from '../services/requests/AuthRequests';
 import { useTranslation } from 'react-i18next';
-
+import {
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBBtn,
+  MDBIcon,
+  MDBInput,
+  MDBCheckbox
+}
+from 'mdb-react-ui-kit';
 
 function Signup() {
   const [firstName, setFirstName] = useState('');
@@ -62,32 +71,38 @@ function Signup() {
 
   return (
     <>
-    {isLoading && (
-         <div style={{textAlign:'center'}}>
-         <div 
-             className="loading"
-             style={{display: 'flex',
-             justifyContent: 'center',
-             alignItems: 'center'
-             }}>
-         <Backdrop
-             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-             open={isLoading}
-             >
-               <p>
-                 <CircularProgress sx={{color:'white'}} /> 
-               </p>
-         </Backdrop>
-        </div>
+         {isLoading && (
+        <div style={{textAlign:'center'}}>
+        <div 
+            className="loading"
+            style={{display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+            }}>
+        <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={isLoading}
+            >
+              <p>
+                <CircularProgress sx={{color:'white'}} /> 
+              </p>
+        </Backdrop>
        </div>
-    )}
-    <Container component="main" maxWidth="xs" sx={{border:'1px solid black', padding:'10px'}}>
-      <CssBaseline />
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8px' }}>
-        <Typography variant="h5">{t("signup", {ns: ['auth']})}</Typography>
-        <form style={{ width: '100%', marginTop: '8px' }} onSubmit={handleSubmit}>
+      </div>
+   )}
+    <MDBContainer fluid className="p-3 my-5">
+      <MDBRow>
+        <MDBCol col='10' md='6'>
+       <img src="
+      https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Phone image" />
+        </MDBCol>
+        <br />
+        <MDBCol col='4' md='6'>
+        <h1 style={{color:'white', textAlign:'center'}}>{t("signup", {ns: ['auth']})} </h1>
+              <form style={{ width: '100%', marginTop: '8px' }} onSubmit={handleSubmit}>
          <TextField
             variant="outlined"
+             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             margin="normal"
             required
             fullWidth
@@ -98,6 +113,7 @@ function Signup() {
             />
           <TextField
             variant="outlined"
+             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             margin="normal"
             required
             fullWidth
@@ -109,6 +125,7 @@ function Signup() {
           <TextField
             variant="outlined"
             margin="normal"
+             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             required
             fullWidth
             label={t("email", {ns: ['auth']})}
@@ -119,6 +136,7 @@ function Signup() {
           <TextField
             variant="outlined"
             margin="normal"
+             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             required
             fullWidth
             label={t("password", {ns: ['auth']})}
@@ -126,18 +144,23 @@ function Signup() {
             value={password}
             onChange={ (e) => setPassword(e.target.value)}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ margin: '24px 0 16px' }}
-          >
-            {t("signup", {ns: ['auth']})}
-          </Button>
-        </form>
-      </div>
-    </Container>
+          <div className="d-flex justify-content-between mx-4 mb-4">
+            <a href="/login" style={{color:'white', opacity:'0.7', textDecoration:'none'}}>  {t("loginLink", {ns: ['auth']})} </a>
+          </div>
+         <Button
+             type="submit"
+             fullWidth
+             variant="contained"
+             color="primary"
+             style={{ margin: '24px 0 16px', padding:'10px', borderRadius:'10px' }}
+           >
+             {t("signup", {ns: ['auth']})} 
+
+           </Button>
+          </form>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
 
     {isSuccessOpen && (
   <Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>

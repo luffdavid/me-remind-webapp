@@ -10,5 +10,6 @@
     "signup": "Registrieren",
     "alertMsgRegister": "Benutzerkonto erfolgreich angelegt!",
     "errorRegister": "Fehler: Benutzerkonto konnte nicht angelegt werden.",
-    "signupLink": "Noch keinen Account? Hier registrieren!"
+    "signupLink": "Noch keinen Account? Hier registrieren!",
+    "loginLink": "Du hast schon einen Account? Jetzt einloggen!"
 }

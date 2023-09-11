@@ -114,7 +114,6 @@ function Login() {
             onChange={ (e) => setPassword(e.target.value)}
           />
           <div className="d-flex justify-content-between mx-4 mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="/signup" style={{color:'white', opacity:'0.7', textDecoration:'none'}}>  {t("signupLink", {ns: ['auth']})} </a>
           </div>
 

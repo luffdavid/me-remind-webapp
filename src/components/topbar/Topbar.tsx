@@ -31,7 +31,7 @@ const Topbar = () => {
     <>
     {!isLoggedIn && (
       <>
-      <div style={{marginLeft:'93%'}}>
+      <div style={{marginLeft:'90%'}}>
        <div className="avatar">
           <div className='languageSettings'>
           <Select
