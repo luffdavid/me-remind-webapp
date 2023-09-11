@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTranslation } from 'react-i18next';
 import { getUserInformation } from '../../services/constants/Constants';
+import SuccessAlert from '../alerts/SuccessAlert';
 
 const AddButton: React.FC = () => {
   const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -52,7 +53,7 @@ const AddButton: React.FC = () => {
       		setIsSuccessOpen(true);
       		setTimeout(() => {
 				setIsSuccessOpen(false);
-			}, 60000);
+			}, 3000);
     } catch (error) {
 			console.error('Error:', error);
 			setErrorText('Error:' + error);
@@ -152,14 +153,15 @@ const AddButton: React.FC = () => {
     	</div>
       
 	  	{isSuccessOpen && (
-		<Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
-          <Alert 
-		  		onClose={() => setIsSuccessOpen(false)} 
-				severity="success" >
-            <AlertTitle>Success</AlertTitle>
-            Reminder successfully saved
-          </Alert>
-        </Snackbar>
+		// <Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
+        //   <Alert 
+		//   		onClose={() => setIsSuccessOpen(false)} 
+		// 		severity="success" >
+        //     <AlertTitle>Success</AlertTitle>
+        //     Reminder successfully saved
+        //   </Alert>
+        // </Snackbar>
+		<SuccessAlert />
       )}
 
       {isErrorOpen && (

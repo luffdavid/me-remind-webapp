@@ -1,4 +1,4 @@
 export interface TaskListInterface {
-    title: string;
+    title?: string;
     taskType: string; //incomplete, all, today or overdue
 }

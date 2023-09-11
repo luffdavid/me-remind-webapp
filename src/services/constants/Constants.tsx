@@ -1,3 +1,6 @@
+import { IconPropsSizeOverrides } from "@mui/material";
+import Icons from "../../components/icons/MuiIcons";
+
 let api_base = '';
 
 if (process.env.NODE_ENV === 'production') {
@@ -36,6 +39,18 @@ function logout() {
   }
 }
 
+function getIcon (taskType : string) {
+  let icon;
+  if (taskType === 'COMPLETE') {
+   return  <Icons.CheckCircleIcon style={{fontSize:'64px'}} /> ;
+  } else if( taskType === 'INCOMPLETE') {
+    return  <Icons.UnpublishedIcon style={{fontSize:'64px'}} />
+  } else if (taskType === 'OVERDUE') {
+    return  <Icons.WatchLaterIcon style={{fontSize:'64px'}} />
+   } else {
+    return  <Icons.TodayIcon style={{fontSize:'64px'}} />
+    }
+}
 
 
-export { DATE_TODAY, api_base, getUserStatus, logout, getUserInformation };
+export { DATE_TODAY, api_base, getUserStatus, logout, getUserInformation, getIcon };

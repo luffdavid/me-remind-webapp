@@ -56,7 +56,6 @@ export const StartCards = () => {
     return (
       <>
         <div> 
-          
           {isLoading && (
           <div style={{textAlign:'center'}}>
             <div 
@@ -101,8 +100,6 @@ export const StartCards = () => {
                 </div>
           </Link>
       </div>  
-       
-
         <div>
           <Link 
               to="/overdue-tasks" 

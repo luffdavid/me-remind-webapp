@@ -9,6 +9,7 @@ import { Alert, AlertTitle, Button, Skeleton, Snackbar } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import comletedtasksimg from '../assets/completed-task.png'
+import TaskListAlert from '../components/alerts/TaskListAlert'
 
 const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -16,12 +17,27 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
     const { t, i18n } = useTranslation(['tasklist']);
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         loadTodos();
 	}, []);
 
 
+  
+    useEffect(() => {
+      // Zeigen Sie den Erfolgs-Alert für 1 Sekunde an, indem Sie showAlert auf true setzen
+      setShowAlert(true);
+  
+      // Verzögern Sie das Ausblenden des Alerts nach 1 Sekunde
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 1000);
+  
+      return () => {
+        clearTimeout(timer);
+      };
+    }, []);
     
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -85,6 +101,8 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
 
       return (
         <div>
+ {/* Zeigen Sie den SuccessAlert nur dann an, wenn showAlert auf true gesetzt ist */}
+      {showAlert && <TaskListAlert taskType={taskType} />}
  {isErrorOpen && (
           <div>
              <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>

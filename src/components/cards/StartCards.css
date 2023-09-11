@@ -25,6 +25,16 @@
       /* Andere Anpassungen für das Erscheinungsbild bei kleiner Bildschirmgröße */
     }
   }
+  /* Karte vergrößern, wenn der Mauszeiger darüber schwebt */
+.card:hover {
+  transform: scale(1.1);
+}
+
+/* Karte vergrößern, wenn sie den Fokus erhält */
+.card:focus {
+  transform: scale(1.1);
+  outline: none; /* Entfernen Sie den standardmäßigen Fokus-Rahmen, falls gewünscht */
+}
   .card-icon {
     /* font-size: 32px; */
     position: absolute;
