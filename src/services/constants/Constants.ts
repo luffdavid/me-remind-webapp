@@ -22,5 +22,20 @@ function logout() {
   window.location.reload();
  }
 
+ function getUserInformation(param: string) {
+  const userStr = localStorage.getItem("user");
 
-export { DATE_TODAY, api_base, getUserStatus, logout };
+  if (param === "email" && userStr !== null) {
+    return JSON.parse(userStr).email;
+  } else if(param === "firstName" && userStr !== null) {
+    return JSON.parse(userStr).firstName;
+  } else if(param === "lastName" && userStr !== null) {
+    return JSON.parse(userStr).lastName;
+  } else if(param === "userId" && userStr !== null){
+    return JSON.parse(userStr).userId;
+  }
+}
+
+
+
+export { DATE_TODAY, api_base, getUserStatus, logout, getUserInformation };

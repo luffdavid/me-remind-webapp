@@ -11,8 +11,8 @@ export const completeTodo = async (id: string): Promise<void> => {
     await fetch(`${api_base}/todo/complete/${id}`);
   };
 
-export const addNewTodo = async (newTodo: string, dueDate: Dayjs | null, description: string): Promise<TodoInterface> => {
-  const response = await axios.post<TodoInterface>(`${api_base}/todo/new`, { text: newTodo, dueDate: dueDate, description: description});
+export const addNewTodo = async (userId: string, newTodo: string, dueDate: Dayjs | null, description: string): Promise<TodoInterface> => {
+  const response = await axios.post<TodoInterface>(`${api_base}/todo/new`, {userId, text: newTodo, dueDate: dueDate, description: description});
   return response.data;
 };
 

@@ -10,6 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTranslation } from 'react-i18next';
+import { getUserInformation } from '../../services/constants/Constants';
 
 const AddButton: React.FC = () => {
   const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -44,7 +45,7 @@ const AddButton: React.FC = () => {
 				setIsErrorOpen(false);
 			}, 60000);
 		}
-      const newTodoData = await addNewTodo(newTodo, dueDate, description);
+      const newTodoData = await addNewTodo(getUserInformation("userId"),newTodo, dueDate, description);
       		setTodos([...todos, newTodoData]);
       		handleClose();
       		setNewTodo('');
@@ -115,6 +116,17 @@ const AddButton: React.FC = () => {
                 				value={description}
                 				color='primary'
                 				placeholder={t("descriptionPlaceholder", { ns: ['addButton'] })}
+             				 />
+            		</Typography>
+					<Typography 
+						id="modal-modal-description"
+						sx={{ mt: 2 }}>
+							<TextField
+								fullWidth
+                				label="User_id"
+                			aria-readonly
+                				value={getUserInformation("userId")}
+                				color='primary'
              				 />
             		</Typography>
 					 <br />

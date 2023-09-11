@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import './Topbar.css'
 import { Select, MenuItem, Button } from '@mui/material';
 import ReactCountryFlag from "react-country-flag";
-import { logout } from '../../services/constants/Constants';
+import { getUserInformation, logout } from '../../services/constants/Constants';
 import { getUserStatus } from '../../services/constants/Constants';
 
 const Topbar = () => {
@@ -61,7 +61,7 @@ const Topbar = () => {
           </div>
           <Button onClick={logout}>Logout</Button>
           
-          <Avatar alt="Username"  src="/path-to-avatar-image.jpg" /> 
+          <Avatar  alt="Username">{getUserInformation("firstName")[0]} </Avatar> 
           </div>
         </div>
         

@@ -28,7 +28,7 @@ function Login() {
       //SUCCESS
       setIsLoading(false);
         setUser(response);
-        localStorage.setItem('user', email)
+        localStorage.setItem('user', JSON.stringify(response));
       setIsSuccessOpen(true);
       setTimeout(() => {
       setIsSuccessOpen(false);
