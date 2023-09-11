@@ -8,38 +8,41 @@ import { useTranslation } from 'react-i18next';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
+import {getUserStatus} from './services/constants/Constants';
+
 function App() {
 	const { t, i18n } = useTranslation(['start']);
+	const isLoggedIn = getUserStatus();
 	return (
 		<>
 		<Topbar />
 		<div className="App">
-			<AddButton />
+			{isLoggedIn ? <AddButton /> : <></> }
 		<BrowserRouter>
-		<Routes>
+		  <Routes>
 			<Route
 			path="/"
-			element={ <Start />}
+			element={!isLoggedIn ?  <Navigate to ="/login" /> : <Start />}
 			/>
 			<Route
-			path="/login"
-			element={ <Login />}
+			     path="/login"
+				 element={!isLoggedIn ? <Login/> : <Navigate to="/" />} 
 			/>
 			<Route
 			path="/signup"
 			element={ <Signup />}
 			/>
 			<Route path="/incomplete-tasks"
-			element={<TaskList title={t("incomplete", {ns: ['start']})}   taskType='INCOMPLETE'/>}
+			element={!isLoggedIn ? <Navigate to ="/login" /> : <TaskList title={t("incomplete", {ns: ['start']})}   taskType='INCOMPLETE'/>}
 			/>
            <Route path="/due-today-tasks"
-			element={<TaskList title={t("today", {ns: ['start']})} taskType='TODAY'/>}
+			element={!isLoggedIn ? <Navigate to ="/login" /> : <TaskList title={t("today", {ns: ['start']})} taskType='TODAY'/>}
 			/>
 			 <Route path="/overdue-tasks"
-			element={<TaskList title={t("overdue", {ns: ['start']})}  taskType='OVERDUE'/>}
+			element={!isLoggedIn ? <Navigate to ="/login" /> : <TaskList title={t("overdue", {ns: ['start']})}  taskType='OVERDUE'/>}
 			/>
 			<Route path="/completed-tasks"
-			element={<TaskList title={t("completed", {ns: ['start']})} taskType='COMPLETE'/>}
+			element={ !isLoggedIn ? <Navigate to ="/login" /> : <TaskList title={t("completed", {ns: ['start']})} taskType='COMPLETE'/>}
 			/>
 		</Routes>
 		</BrowserRouter>

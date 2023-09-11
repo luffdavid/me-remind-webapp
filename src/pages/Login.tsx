@@ -8,24 +8,34 @@ function Login() {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorOpen, setIsErrorOpen] = useState(false);
-
+  const [user, setUser] = useState([]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Verhindert, dass das Formular standardmäßig gesendet wird
-
-    if(!email || !password) {
-      setErrorMsg("Please fill in all fields!");
-      return;
-    }
+    e.preventDefault();
 
     try {
-      await login( email, password);
+      const response =  await login( email, password);
+      if(response === "Error") {
+        //ERROR (username/password incorrect OR error )
+        setErrorMsg("");
+        setIsErrorOpen(true);
+			    setTimeout(() => {
+				  setIsErrorOpen(false);
+			}, 60000);
+    } else {
+      //SUCCESS
+        setUser(response);
+        localStorage.setItem('user', email)
       setIsSuccessOpen(true);
       setTimeout(() => {
       setIsSuccessOpen(false);
-     }, 60000);
-      // Hier kannst du den Benutzer nach der Registrierung zu einer anderen Seite weiterleiten
+    }, 60000);
+    window.location.reload();
+    }
+
     } catch (error) {
-     setErrorMsg('Error: ' + (error as Error).message);
+      const response =  await login( email, password);
+      console.log(response);
+      setErrorMsg("");
 			setIsErrorOpen(true);
 			setTimeout(() => {
 				setIsErrorOpen(false);
