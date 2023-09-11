@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Alert, AlertTitle, Snackbar, Button, Container, CssBaseline, TextField, Typography } from '@mui/material';
+import {Alert, AlertTitle, Snackbar, Button, Container, CssBaseline, TextField, Typography, Backdrop, CircularProgress } from '@mui/material';
 import { login } from '../services/requests/AuthRequests';
 
 function Login() {
@@ -8,13 +8,16 @@ function Login() {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [isErrorOpen, setIsErrorOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState([]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const response =  await login( email, password);
       if(response === "Error") {
+        setIsLoading(false);
         //ERROR (username/password incorrect OR error )
         setErrorMsg("");
         setIsErrorOpen(true);
@@ -23,6 +26,7 @@ function Login() {
 			}, 60000);
     } else {
       //SUCCESS
+      setIsLoading(false);
         setUser(response);
         localStorage.setItem('user', email)
       setIsSuccessOpen(true);
@@ -33,6 +37,7 @@ function Login() {
     }
 
     } catch (error) {
+      setIsLoading(false);
       const response =  await login( email, password);
       console.log(response);
       setErrorMsg("");
@@ -45,6 +50,25 @@ function Login() {
 
   return (
     <>
+    {isLoading && (
+         <div style={{textAlign:'center'}}>
+         <div 
+             className="loading"
+             style={{display: 'flex',
+             justifyContent: 'center',
+             alignItems: 'center'
+             }}>
+         <Backdrop
+             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+             open={isLoading}
+             >
+               <p>
+                 <CircularProgress sx={{color:'white'}} /> 
+               </p>
+         </Backdrop>
+        </div>
+       </div>
+    )}
     <Container component="main" maxWidth="xs" sx={{border:'1px solid black', padding:'10px'}}>
       <CssBaseline />
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8px' }}>
