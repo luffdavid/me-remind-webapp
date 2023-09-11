@@ -9,5 +9,6 @@
     "password": "Passwort",
     "signup": "Registrieren",
     "alertMsgRegister": "Benutzerkonto erfolgreich angelegt!",
-    "errorRegister": "Fehler: Benutzerkonto konnte nicht angelegt werden."
+    "errorRegister": "Fehler: Benutzerkonto konnte nicht angelegt werden.",
+    "signupLink": "Noch keinen Account? Hier registrieren!"
 }

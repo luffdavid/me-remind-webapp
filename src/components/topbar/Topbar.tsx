@@ -31,6 +31,24 @@ const Topbar = () => {
     <>
     {!isLoggedIn && (
       <>
+      <div style={{marginLeft:'93%'}}>
+       <div className="avatar">
+          <div className='languageSettings'>
+          <Select
+          className="custom-select"
+          value={i18n.language}
+          style={{ borderStyle:'none' }}
+          onChange={onClickLanguageChange}
+        >
+          {languages.map((language) => (
+            <MenuItem key={language.code} value={language.code}>
+              <ReactCountryFlag countryCode={language.flag} svg />
+            </MenuItem>
+          ))}
+        </Select>
+          </div>
+        </div>
+        </div>
       </>
     )}
 

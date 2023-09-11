@@ -9,6 +9,7 @@
     "password": "Password",
     "signup": "Sign up",
     "alertMsgRegister": "User account created successfully",
-    "errorRegister": "Error: Creating new account wasn't successful"
+    "errorRegister": "Error: Creating new account wasn't successful",
+    "signupLink": "Don't have an account yet? SIGN UP!"
 
 }
