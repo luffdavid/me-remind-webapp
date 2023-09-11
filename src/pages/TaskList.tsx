@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {TaskListInterface} from '../services/interfaces/TaskListInterface';
 import { TodoInterface } from '../services/interfaces/TodoInterface';
 import { getTodos, completeTodo, addNewTodo, deleteTodo } from '../services/requests/TodoRequests'; 
-import { DATE_TODAY, api_base } from '../services/constants/Constants';
+import { DATE_TODAY, api_base, getUserInformation } from '../services/constants/Constants';
 import Icons from '../components/icons/MuiIcons';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Alert, AlertTitle, Button, Skeleton, Snackbar } from '@mui/material';
@@ -29,7 +29,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const loadTodos = async () => {
       setIsLoading(true);
         try {
-          const response = await getTodos();
+          const response = await getTodos(getUserInformation("userId") );
           setTodos(response);
           if (taskType === 'COMPLETE') {
             console.log("Filter: " + taskType);

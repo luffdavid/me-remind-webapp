@@ -5,7 +5,7 @@ import './StartCards.css'
 import {Link} from 'react-router-dom'
 import { getTodos } from '../../services/requests/TodoRequests'
 import { TodoInterface } from '../../services/interfaces/TodoInterface';
-import { DATE_TODAY } from '../../services/constants/Constants'
+import { DATE_TODAY, getUserInformation } from '../../services/constants/Constants'
 import { useTranslation } from 'react-i18next'
 
 export const StartCards = () => {
@@ -28,7 +28,7 @@ export const StartCards = () => {
     const loadTodos = async () => {
       setIsLoading(true);
         try {
-          const response = await getTodos();
+          const response = await getTodos(getUserInformation("userId") );
           setTodos(response);
           setIsLoading(false);
           setIncompletedTodos(response.filter((todo) => !todo.complete));
