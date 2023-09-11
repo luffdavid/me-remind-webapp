@@ -1,0 +1,14 @@
+{
+    "login":"Login",
+    "success":"Success",
+    "alertMsgLogin": "Logged in as",
+    "errorLogin": "Error: Logging in wasn't successful",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "signup": "Sign up",
+    "alertMsgRegister": "User account created successfully",
+    "errorRegister": "Error: Creating new account wasn't successful"
+
+}

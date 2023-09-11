@@ -11,7 +11,7 @@ import Signup from './pages/Signup';
 import {getUserStatus} from './services/constants/Constants';
 
 function App() {
-	const { t, i18n } = useTranslation(['start']);
+	const { t } = useTranslation(['start']);
 	const isLoggedIn = getUserStatus();
 	return (
 		<>
@@ -30,7 +30,7 @@ function App() {
 			/>
 			<Route
 			path="/signup"
-			element={ <Signup />}
+			element={isLoggedIn ? <Navigate to="/" /> : <Signup />}
 			/>
 			<Route path="/incomplete-tasks"
 			element={!isLoggedIn ? <Navigate to ="/login" /> : <TaskList title={t("incomplete", {ns: ['start']})}   taskType='INCOMPLETE'/>}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Alert, AlertTitle, Snackbar, Button, Container, CssBaseline, TextField, Typography, Backdrop, CircularProgress } from '@mui/material';
 import { login } from '../services/requests/AuthRequests';
+import { useTranslation } from 'react-i18next';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -10,6 +11,9 @@ function Login() {
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState([]);
+
+  const { t } = useTranslation(['auth']);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -72,14 +76,14 @@ function Login() {
     <Container component="main" maxWidth="xs" sx={{border:'1px solid black', padding:'10px'}}>
       <CssBaseline />
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8px' }}>
-        <Typography variant="h5">Anmelden</Typography>
+        <Typography variant="h5">{t("login", {ns: ['auth']})}</Typography>
         <form style={{ width: '100%', marginTop: '8px' }} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            label="E-Mail-Adresse"
+            label={t("email", {ns: ['auth']})}
             type="email"
             value={email}
             onChange={ (e) => setEmail(e.target.value)}
@@ -89,7 +93,7 @@ function Login() {
             margin="normal"
             required
             fullWidth
-            label="Passwort"
+            label={t("password", {ns: ['auth']})}
             type="password"
             value={password}
             onChange={ (e) => setPassword(e.target.value)}
@@ -101,7 +105,7 @@ function Login() {
             color="primary"
             style={{ margin: '24px 0 16px' }}
           >
-            Anmelden
+            {t("login", {ns: ['auth']})}
           </Button>
         </form>
       </div>
@@ -112,8 +116,8 @@ function Login() {
         <Alert 
         onClose={() => setIsSuccessOpen(false)} 
       severity="success" >
-          <AlertTitle>Success</AlertTitle>
-         Logged in as {email}
+          <AlertTitle>{t("success", {ns: ['auth']})}</AlertTitle>
+          {t("alertMsgLogin", {ns: ['auth']})} {email}
         </Alert>
       </Snackbar>
     )}
@@ -121,7 +125,7 @@ function Login() {
     {isErrorOpen && (
       <Snackbar open={isErrorOpen} autoHideDuration={null} onClose={() => setIsErrorOpen(false)}>
         <Alert onClose={() => setIsErrorOpen(false)} severity="error" >
-          <AlertTitle>Error: Logging in wasn't successful</AlertTitle>
+          <AlertTitle>{t("errorLogin", {ns: ['auth']})}</AlertTitle>
           {errorMsg}
         </Alert>
       </Snackbar>

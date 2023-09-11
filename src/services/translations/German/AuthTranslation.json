@@ -1,0 +1,13 @@
+{
+    "login":"Login",
+    "success":"Das hat geklappt!",
+    "alertMsgLogin": "Eingeloggt als",
+    "errorLogin": "Fehler: Login nicht erfolgreich",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "Email",
+    "password": "Passwort",
+    "signup": "Registrieren",
+    "alertMsgRegister": "Benutzerkonto erfolgreich angelegt!",
+    "errorRegister": "Fehler: Benutzerkonto konnte nicht angelegt werden."
+}
