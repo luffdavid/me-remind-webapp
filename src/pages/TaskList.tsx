@@ -5,20 +5,22 @@ import { getTodos, completeTodo, addNewTodo, deleteTodo } from '../services/requ
 import { DATE_TODAY, api_base, getUserInformation } from '../services/constants/Constants';
 import Icons from '../components/icons/MuiIcons';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Alert, AlertTitle, Button, Skeleton, Snackbar } from '@mui/material';
+import { Alert, AlertTitle, Button, Skeleton, Snackbar, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import comletedtasksimg from '../assets/completed-task.png'
 import TaskListAlert from '../components/alerts/TaskListAlert'
+import { differenceInDays, format } from 'date-fns';
+import getDifference from '../services/constants/Constants';
 
 const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
     const [todos, setTodos] = useState<TodoInterface[]>([]);
     const [expanded, setExpanded] = React.useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
-    const { t, i18n } = useTranslation(['tasklist']);
+    const { t } = useTranslation(['tasklist']);
     const [showAlert, setShowAlert] = useState(false);
-
+    const [daysUntilDue, setDaysUntilDue] = useState<number>();
     useEffect(() => {
         loadTodos();
 	}, []);
@@ -39,9 +41,8 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
       };
     }, []);
     
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+
+
     // GET ALL TODOS
     const loadTodos = async () => {
       setIsLoading(true);
@@ -53,11 +54,17 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
             setTodos(response.filter((todo) => todo.complete));
           } else if( taskType === 'INCOMPLETE') {
             console.log("Filter: " + taskType);
-            setTodos(response.filter((todo) => !todo.complete));
+            setTodos(response.filter((todo) => {
+              setDaysUntilDue(differenceInDays(new Date(todo.dueDate), DATE_TODAY));
+              console.log(daysUntilDue);
+              return !todo.complete
+            }))
+          
           } else if (taskType === 'OVERDUE') {
             console.log("Filter: " + taskType);
             setTodos(response.filter((todo) => {
               const dueDate = new Date(todo.dueDate);
+              setDaysUntilDue(differenceInDays(dueDate, DATE_TODAY));
               return !todo.complete && dueDate.getTime() < DATE_TODAY;
             }))} else {
               setTodos(response.filter((todo) => {
@@ -99,9 +106,22 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
         }
       };
 
+      function getDifferenceText(diff: number) {
+        let text = '';
+        if (diff === -1) {
+     text = t("yesterdayDue", {ns: ['tasklist']});
+   } else if (diff === 0) {
+     text = t("todayDue", {ns: ['tasklist']});
+   } else if(diff > 1) {
+     text =  t("dueIn", {ns: ['tasklist']}) + " " + diff + " " + t("days", {ns: ['tasklist']})
+   } else if(diff < -1) {
+     text =  t("dueOver", {ns: ['tasklist']}) + Math.abs(diff) + " " + t("days", {ns: ['tasklist']})
+   }
+   return text;
+  }
       return (
         <div>
- {/* Zeigen Sie den SuccessAlert nur dann an, wenn showAlert auf true gesetzt ist */}
+ {/* Zeige den SuccessAlert nur dann an, wenn showAlert auf true gesetzt ist */}
       {showAlert && <TaskListAlert taskType={taskType} />}
  {isErrorOpen && (
           <div>
@@ -117,11 +137,14 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
         <div>
            {isLoading ?
      <div>
-     <Link 
+      <Link 
          to="/"
          style={{textDecoration:'none'}}>
-           <Button sx={{color:'white'}}><Icons.WestIcon /></Button>
+          <Tooltip title="Add" placement="top-start">
+            <Button sx={{color:'white'}}><Icons.WestIcon /></Button>
+          </Tooltip>
      </Link>
+  
      <h1>{title}</h1>
      <h4>{t("yourReminders", {ns: ['tasklist']})}</h4>
      <div className="todos">
@@ -134,32 +157,50 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
       
         : (
             <div>
-              <Link 
+              <Tooltip title="Back to overview">
+                <Link 
                   to="/"
                   style={{textDecoration:'none'}}>
                     <Button sx={{color:'white'}}>
                       <Icons.WestIcon />
                     </Button>
-              </Link>
+                </Link>
+              </Tooltip>
+             
               <h1>{title}</h1>
               <h4>{t("yourReminders", {ns: ['tasklist']})}</h4>
               <div className="todos">
                 {todos.length > 0 ? (
                   todos.map((todo) => (
+                    
                     <div
                       className={"todo" + (todo.complete ? " is-complete" : "")}
                       key={todo._id}
                       onClick={() => completeTodo(todo._id)}
                     >
                       <div className="checkbox">
-                        {todo.complete ? <Icons.CheckCircleIcon /> : <Icons.CircleIcon />}
+                        {todo.complete ? 
+                        <Tooltip title="Move it to incompleted tasks">
+                          <Icons.CheckCircleIcon />
+                        </Tooltip> 
+                        : 
+                        <Tooltip title="Move it to completed tasks">
+                          <Icons.CircleIcon />
+                        </Tooltip>
+                        }
                       </div>
                       <div className="todo-duedate">
                         <>
                         {t("", {ns: ['tasklist']})} 
-                        {new Date(todo.dueDate).toLocaleDateString('de-DE')}
                         </>
                         {/* {todo.dueDate} */}
+                        <Tooltip placement='top' title={new Date(todo.dueDate).toLocaleDateString('de-DE')}>
+                     
+                          <Button sx={{color:'white'}}>
+                            {getDifferenceText(getDifference(new Date(todo.dueDate), DATE_TODAY))}
+                          </Button>
+                        </Tooltip> 
+                      {/* {new Date(todo.dueDate).toLocaleDateString('de-DE')} */}
                         </div>
                       <div className="text">
                         {todo.text} <br />
@@ -169,7 +210,9 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
                         className="delete-todo"
                         onClick={() => handleDeleteTodo(todo._id)}
                       >
-                        <Icons.DeleteForeverIcon sx={{ color: 'red' }} />
+                        <Tooltip placement='top' title="Delete this task forever">
+                          <Icons.DeleteForeverIcon sx={{ color: 'red' }} />
+                        </Tooltip>
                       </div>
                     </div>
                   ))

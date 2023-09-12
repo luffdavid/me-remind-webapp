@@ -12,7 +12,6 @@ const Start: React.FC = () => {
         {t('welcome', { ns: ['start'] })}, 
         {localStorage.getItem('user') !== null && (
           <span>{getUserInformation("firstName")}</span>)}{' '}
-        
       </h1>
       <StartCards />
     </div>

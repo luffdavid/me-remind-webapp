@@ -4,5 +4,11 @@
     "yourReminders": "Deine Reminders",
     "due":"Fällig am: ",
     "localLanguage":"de-DE",
-    "noTasksMsg": "Du hast momentan keine Aufgaben!"
+    "noTasksMsg": "Du hast momentan keine Aufgaben!",
+    "todayDue": "Heute fällig",
+    "yesterdayDue":"Seit gestern fällig",
+    "tomorrowDue": "Morgen fällig",
+    "dueIn": "Fällig in",
+    "days": "Tagen",
+    "dueOver": "Fällig seit"
 }

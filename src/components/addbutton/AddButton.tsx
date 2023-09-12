@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, AlertTitle, Box, Button, Modal, Snackbar, Typography, TextField} from '@mui/material'
+import { Alert, AlertTitle, Box, Button, Modal, Snackbar, Typography, TextField, Tooltip} from '@mui/material'
 import { ModalStyle } from '../../styles/ModalStyle';
 import { TodoInterface } from '../../services/interfaces/TodoInterface';
 import { addNewTodo } from '../../services/requests/TodoRequests';
@@ -67,7 +67,12 @@ const AddButton: React.FC = () => {
   return (
   <>
   	<div>
-		<div className="addPopup" onClick={handleOpen}>+</div>
+		<Tooltip placement='top' title="Add a new reminder">
+		<div className="addPopup" onClick={handleOpen}>
+			+
+		</div>
+		</Tooltip>
+		
 			<Modal
 				open={open}
           		onClose={handleClose}

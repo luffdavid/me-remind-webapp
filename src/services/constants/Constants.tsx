@@ -1,6 +1,8 @@
-import { IconPropsSizeOverrides } from "@mui/material";
+import { differenceInDays } from "date-fns";
 import Icons from "../../components/icons/MuiIcons";
 
+
+// set API link
 let api_base = '';
 
 if (process.env.NODE_ENV === 'production') {
@@ -11,7 +13,12 @@ if (process.env.NODE_ENV === 'production') {
 
 const DATE_TODAY = new Date().setHours(0, 0, 0, 0);
 
+const languages = [
+  { code: 'en', name: 'English', flag: 'GB' },
+  { code: 'de', name: 'German', flag: 'DE' },
+];
 
+// isLoggedIn ?
 function getUserStatus () {
   if(localStorage.getItem('user')) {
     return true;    
@@ -20,11 +27,13 @@ function getUserStatus () {
   }
 }
 
+//USER logout
 function logout() {
   localStorage.removeItem('user');
   window.location.reload();
  }
 
+ // get email, firstName, lastName and id of user
  function getUserInformation(param: string) {
   const userStr = localStorage.getItem("user");
 
@@ -39,8 +48,8 @@ function logout() {
   }
 }
 
+// get the right Icon for the TaskListAlert
 function getIcon (taskType : string) {
-  let icon;
   if (taskType === 'COMPLETE') {
    return  <Icons.CheckCircleIcon style={{fontSize:'64px'}} /> ;
   } else if( taskType === 'INCOMPLETE') {
@@ -53,4 +62,25 @@ function getIcon (taskType : string) {
 }
 
 
-export { DATE_TODAY, api_base, getUserStatus, logout, getUserInformation, getIcon };
+function getDifference(dueDate: number | Date, todayDate: number | Date) {
+  // const { t } = useTranslation(['tasklist']);
+  const diff = differenceInDays(dueDate, todayDate);
+  let text = '';
+  return diff;
+//  if (diff === -1) {
+//     text = t("yesterdayDue", {ns: ['tasklist']});
+//   } else if (diff === 0) {
+//     text = t("todayDue", {ns: ['tasklist']});
+//   } else if(diff > 1) {
+//     text =  t("dueIn", {ns: ['tasklist']}) + diff + " " + t("days", {ns: ['tasklist']})
+//   } else if(diff < -1) {
+//     text =  t("dueOver", {ns: ['tasklist']}) + Math.abs(diff) + " " + t("days", {ns: ['tasklist']})
+//   }
+
+//   return <i>{text}</i>;
+}
+
+export default getDifference;
+
+
+export { DATE_TODAY, api_base,languages, getUserStatus, logout, getUserInformation, getIcon, getDifference};

@@ -9,7 +9,8 @@ import TaskListTranslationEN from './English/TaskListTranslation.json'
 import TaskListTranslationDE from './German/TaskListTranslation.json'
 import AuthTranslationEN from './English/AuthTranslation.json'
 import AuthTranslationDE from './German/AuthTranslation.json'
-const resources = {
+  
+  const resources = {
   en: {
     start: StartTranslationEN,
     addButton: AddButtonTranslationEN,

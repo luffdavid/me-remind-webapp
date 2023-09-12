@@ -4,5 +4,11 @@
     "yourReminders": "Your Reminders",
     "due":"Due:",
     "localLanguage":"en-EN",
-    "noTasksMsg": "You currently have no tasks"
+    "noTasksMsg": "You currently have no tasks",
+    "todayDue": "Due today",
+    "yesterdayDue":"Due yesterday",
+    "tomorrowDue": "Due tomorrow",
+    "dueIn": "Due in",
+    "days": "days",
+    "dueOver": "Due since"
 }
