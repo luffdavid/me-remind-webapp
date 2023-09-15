@@ -10,8 +10,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTranslation } from 'react-i18next';
-import { getUserInformation } from '../../services/constants/Constants';
+import { PRIMARY, getUserInformation } from '../../services/constants/Constants';
 import SuccessAlert from '../alerts/SuccessAlert';
+import CustomizedButton from '../buttons/Button';
+import CustomizedTextField from '../textfields/TextField';
 
 const AddButton: React.FC = () => {
   const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -91,67 +93,80 @@ const AddButton: React.FC = () => {
 					 <Typography 
 					 	id="modal-modal-description"
 						sx={{ mt: 2 }}>
-							<TextField
+							<CustomizedTextField
 								label={t("reminderTitle", { ns: ['addButton'] })}
-								fullWidth
-								required
+								// fullWidth
+								// required
 								type="text"
 								onChange={e => setNewTodo(e.target.value)}value={newTodo}
-								color='primary'
+								// color='primary'
 								placeholder={t("titlePlaceholder", { ns: ['addButton'] })}
 							/>
 					</Typography>
 						
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
-						<DemoContainer components={['DatePicker']}>
-							<DatePicker
-								value={dueDate}
-                  				onChange={(newValue) => setDueDate(newValue)} />
-						</DemoContainer>
-					</LocalizationProvider>
+  <DemoContainer components={['DatePicker']}>
+    <DatePicker
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: '#E0E3E7',
+          },
+          '&:hover fieldset': {
+            borderColor: PRIMARY,
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: PRIMARY,
+          },
+        },
+      }}
+      value={dueDate}
+      onChange={(newValue) => setDueDate(newValue)}
+    />
+  </DemoContainer>
+</LocalizationProvider>
+
 
             		<Typography 
 						id="modal-modal-description"
 						sx={{ mt: 2 }}>
-							<TextField
-								fullWidth
+							<CustomizedTextField
+								// fullWidth
                 				label={t("description", { ns: ['addButton'] })}
                 				type="string"
-                				multiline
+                				// multiline
                 				onChange={e => setDescription(e.target.value)}
                 				value={description}
-                				color='primary'
+                				// color='primary'
                 				placeholder={t("descriptionPlaceholder", { ns: ['addButton'] })}
              				 />
             		</Typography>
 					<Typography 
 						id="modal-modal-description"
-						sx={{ mt: 2 }}>
-							<TextField
-								fullWidth
+						sx={{ mt: 2 }}
+						>
+						<CustomizedTextField
+								//fullwidth
                 				label="User_id"
-                			aria-readonly
+                				aria-readonly
                 				value={getUserInformation("userId")}
-                				color='primary'
+                				
              				 />
             		</Typography>
 					 <br />
             		<Typography 
-						sx={{ textAlign: 'right' }}>
-              				<Button
-                				sx={{ marginRight: '6px' }}
-                				onClick={handleClose}
-                				color='primary'
-                				variant='outlined'>
-                				{t("cancelBtn", { ns: ['addButton'] })}
-              				</Button>
-              				
-							<Button
-                				onClick={handleAddTodo}
-                				color='primary'
-                				variant='contained'>
-                				{t("createBtn", { ns: ['addButton'] })}
-              				</Button>
+						sx={{ display:'flex', justifyContent:'right', gap:'10px' }}>
+							<CustomizedButton
+							variant='outlined'
+							text={t("cancelBtn", { ns: ['addButton'] })}
+							onClick={handleClose}
+							/>
+							
+							<CustomizedButton
+							variant='contained'
+							onClick={handleAddTodo}
+							text={t("createBtn", { ns: ['addButton'] })}
+              				/>
             		</Typography>
 				</Box>
     		</Modal>

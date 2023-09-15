@@ -76,6 +76,7 @@ const handleClose = () => {
               >
                 {getUserInformation("firstName")[0]}
               </Avatar>
+              
             </Tooltip>
               <Menu
                 id="menu-appbar"
