@@ -25,13 +25,14 @@ interface CustomizedButtonProps {
   text: string;
   variant: 'contained' | 'outlined';
   onClick?: () => void;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
-export default function CustomizedButton({ text, variant, onClick }: CustomizedButtonProps) {
+export default function CustomizedButton({ text, variant, onClick, type }: CustomizedButtonProps) {
   if (variant === 'contained') {
     return (
       <Stack spacing={2} direction="row">
-        <ColorButton variant="contained" onClick={onClick}>
+        <ColorButton variant="contained" onClick={onClick} type={type}>
           {text}
         </ColorButton>
       </Stack>
@@ -39,7 +40,7 @@ export default function CustomizedButton({ text, variant, onClick }: CustomizedB
   } else if (variant === 'outlined') {
     return (
       <Stack spacing={2} direction="row">
-        <SecondaryButton  variant="outlined" onClick={onClick}>
+        <SecondaryButton  variant="outlined" onClick={onClick} type={type}>
           {text}
         </SecondaryButton>
       </Stack>

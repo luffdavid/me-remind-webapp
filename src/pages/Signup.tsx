@@ -13,6 +13,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 import SignupImage from '../assets/SignupImage.svg'
+import CustomizedButton from '../components/buttons/Button';
 function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -148,16 +149,15 @@ function Signup() {
           <div className="d-flex justify-content-between mx-4 mb-4">
             <a href="/login" style={{color:'white', opacity:'0.7', textDecoration:'none'}}>  {t("loginLink", {ns: ['auth']})} </a>
           </div>
-         <Button
+         {/* <Button
              type="submit"
              fullWidth
              variant="contained"
              color="primary"
-             style={{ margin: '24px 0 16px', padding:'10px', borderRadius:'10px' }}
-           >
-             {t("signup", {ns: ['auth']})} 
+             style={{
+             text={t("signup", {ns: ['auth']})} 
 
-           </Button>
+           /> */}
           </form>
         </MDBCol>
       </MDBRow>

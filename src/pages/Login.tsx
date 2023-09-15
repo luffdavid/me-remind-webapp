@@ -4,6 +4,8 @@ import { login } from '../services/requests/AuthRequests';
 import { useTranslation } from 'react-i18next';
 import {MDBContainer,MDBCol,MDBRow }from 'mdb-react-ui-kit';
 import LoginImage from '../assets/LoginImage.svg'
+import { ButtonStyleContained } from '../styles/ButtonStyle';
+import CustomizedButton from '../components/buttons/Button';
 function Login() {
 
     const [email, setEmail] = useState('');
@@ -106,17 +108,22 @@ function Login() {
           <div className="d-flex justify-content-between mx-4 mb-4">
             <a href="/signup" style={{color:'white', opacity:'0.7', textDecoration:'none'}}>  {t("signupLink", {ns: ['auth']})} </a>
           </div>
-
-          <Button
+          <div style={{display:'flex', justifyContent:'right' }}>
+          <CustomizedButton
+          type='submit'
+          variant='contained'
+          text={t("login", {ns: ['auth']})}
+          
+          />
+          </div>
+          
+          {/* <Button
              type="submit"
              fullWidth
              variant="contained"
-             color="primary"
-             style={{ margin: '24px 0 16px', padding:'10px', borderRadius:'10px' }}
-           >
-             {t("login", {ns: ['auth']})} 
-
-           </Button>
+            style={ButtonStyleContained}
+            //  style={{ margin: '24px 0 16px', padding:'10px', borderRadius:'10px' }}
+             >{t("login", {ns: ['auth']})}</Button> */}
           </form>
         </MDBCol>
       </MDBRow>
