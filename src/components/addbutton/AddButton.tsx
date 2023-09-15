@@ -13,7 +13,8 @@ import { useTranslation } from 'react-i18next';
 import { PRIMARY, getUserInformation } from '../../services/constants/Constants';
 import SuccessAlert from '../alerts/SuccessAlert';
 import CustomizedButton from '../buttons/Button';
-import CustomizedTextField from '../textfields/TextField';
+import CustomizedTextField from '../../styles/TextFieldStyle';
+import TextFieldStyle from '../../styles/TextFieldStyle';
 
 const AddButton: React.FC = () => {
   const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -93,13 +94,13 @@ const AddButton: React.FC = () => {
 					 <Typography 
 					 	id="modal-modal-description"
 						sx={{ mt: 2 }}>
-							<CustomizedTextField
+							<TextField
+								sx={TextFieldStyle}
 								label={t("reminderTitle", { ns: ['addButton'] })}
-								// fullWidth
-								// required
+								fullWidth
+								required
 								type="text"
 								onChange={e => setNewTodo(e.target.value)}value={newTodo}
-								// color='primary'
 								placeholder={t("titlePlaceholder", { ns: ['addButton'] })}
 							/>
 					</Typography>
@@ -107,19 +108,7 @@ const AddButton: React.FC = () => {
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
   <DemoContainer components={['DatePicker']}>
     <DatePicker
-      sx={{
-        '& .MuiOutlinedInput-root': {
-          '& fieldset': {
-            borderColor: '#E0E3E7',
-          },
-          '&:hover fieldset': {
-            borderColor: PRIMARY,
-          },
-          '&.Mui-focused fieldset': {
-            borderColor: PRIMARY,
-          },
-        },
-      }}
+      sx={TextFieldStyle}
       value={dueDate}
       onChange={(newValue) => setDueDate(newValue)}
     />
@@ -130,14 +119,14 @@ const AddButton: React.FC = () => {
             		<Typography 
 						id="modal-modal-description"
 						sx={{ mt: 2 }}>
-							<CustomizedTextField
-								// fullWidth
+							<TextField
+								sx={TextFieldStyle}
                 				label={t("description", { ns: ['addButton'] })}
                 				type="string"
-                				// multiline
+                				multiline
+								fullWidth
                 				onChange={e => setDescription(e.target.value)}
                 				value={description}
-                				// color='primary'
                 				placeholder={t("descriptionPlaceholder", { ns: ['addButton'] })}
              				 />
             		</Typography>
@@ -145,8 +134,8 @@ const AddButton: React.FC = () => {
 						id="modal-modal-description"
 						sx={{ mt: 2 }}
 						>
-						<CustomizedTextField
-								//fullwidth
+						<TextField
+								sx={TextFieldStyle}
                 				label="User_id"
                 				aria-readonly
                 				value={getUserInformation("userId")}

@@ -4,8 +4,10 @@
 	--secondary: #8A4EFC;
 	--light: #EEE;
 	--light-alt: #61759b;
-	--dark: #131A26;
-	--dark-alt: #202B3E;
+	/* --dark: #131A26; */
+	--dark: #2c2c2c;
+	/* --dark-alt: #202B3E; */
+	--dark-alt: #121212;
 	--sucess: #22ff00;
 	--error: red;
 }
