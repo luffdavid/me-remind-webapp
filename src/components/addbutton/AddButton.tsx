@@ -158,14 +158,7 @@ const AddButton: React.FC = () => {
     	</div>
       
 	  	{isSuccessOpen && (
-		// <Snackbar open={isSuccessOpen} autoHideDuration={null} onClose={() => setIsSuccessOpen(false)}>
-        //   <Alert 
-		//   		onClose={() => setIsSuccessOpen(false)} 
-		// 		severity="success" >
-        //     <AlertTitle>Success</AlertTitle>
-        //     Reminder successfully saved
-        //   </Alert>
-        // </Snackbar>
+
 		<SuccessAlert />
       )}
 

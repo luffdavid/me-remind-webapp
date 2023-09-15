@@ -20,7 +20,7 @@
   
   .success-alert.visible {
     background-color: black;
-    opacity: 0.9; /* Wenn der Alert sichtbar ist, setzen Sie die Transparenz auf 1 */
+    opacity: 0.97; /* Wenn der Alert sichtbar ist, setzen Sie die Transparenz auf 1 */
     transform: translateY(0); /* Setzen Sie die vertikale Position auf 0, um die "Reinfliegen"-Animation auszulösen */
   }
   

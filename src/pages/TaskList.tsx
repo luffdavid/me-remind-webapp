@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Alert, AlertTitle, Button, Skeleton, Snackbar, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import comletedtasksimg from '../assets/completed-task.png'
+import NoTasksImage  from '../assets/NoTasksImage.svg'
 import TaskListAlert from '../components/alerts/TaskListAlert'
 import { differenceInDays, format } from 'date-fns';
 import getDifference from '../services/constants/Constants';
@@ -219,7 +219,7 @@ const TaskList: React.FC<TaskListInterface> = ({ title, taskType}) => {
                 ) : (
                   <p>
                     <div style={{textAlign:'center'}}>
-                     <img src={comletedtasksimg} alt='' width="25%" height="auto" /> <br /> <br /><br />
+                     <img src={NoTasksImage} alt='' width="25%" height="auto" /> <br /> <br /><br />
                      <h3>{t("noTasksMsg", {ns: ['tasklist']})}</h3>
                     </div>
                   </p>

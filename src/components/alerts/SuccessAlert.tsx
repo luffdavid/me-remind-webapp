@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import successImg from '../../assets/Successs.png';
+import successImg from '../../assets/SuccessImage.svg';
 import '../../styles/SuccessAlert.css';
 
 const SuccessAlert: React.FC = () => {
@@ -19,7 +19,7 @@ const SuccessAlert: React.FC = () => {
   return (
     <div>
            <div className={`success-alert ${isVisible ? 'visible' : ''}`}>
-      <img src={successImg} alt="Success" />
+      <img src={successImg} width={"330px"} alt="Success" />
       <p>Reminder saved!</p>
     </div>
     </div>

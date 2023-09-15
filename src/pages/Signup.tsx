@@ -12,7 +12,7 @@ import {
   MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-
+import SignupImage from '../assets/SignupImage.svg'
 function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -92,9 +92,10 @@ function Signup() {
    )}
     <MDBContainer fluid className="p-3 my-5">
       <MDBRow>
-        <MDBCol col='10' md='6'>
-       <img src="
-      https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Phone image" />
+        <MDBCol col='10' md='6' style={{textAlign:'center'}}>
+       {/* <img src="
+      https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid" alt="Phone image" /> */}
+      <img src={SignupImage} width={"330px"} alt='Signup Image' />
         </MDBCol>
         <br />
         <MDBCol col='4' md='6'>

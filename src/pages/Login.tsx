@@ -3,9 +3,7 @@ import {Alert, AlertTitle, Snackbar, Button,  TextField, Backdrop, CircularProgr
 import { login } from '../services/requests/AuthRequests';
 import { useTranslation } from 'react-i18next';
 import {MDBContainer,MDBCol,MDBRow }from 'mdb-react-ui-kit';
-
-
-
+import LoginImage from '../assets/LoginImage.svg'
 function Login() {
 
     const [email, setEmail] = useState('');
@@ -75,8 +73,9 @@ function Login() {
    )}
     <MDBContainer fluid className="p-3 my-5">
       <MDBRow>
-        <MDBCol col='10' md='6'>
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" />
+        <MDBCol col='10' md='6' style={{textAlign:'center'}}>
+        <img src={LoginImage} width={"330px"} alt="Phone image" />
+        {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" /> */}
         </MDBCol>
         <br />
         <MDBCol col='4' md='6'>

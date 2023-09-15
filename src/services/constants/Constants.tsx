@@ -2,6 +2,7 @@ import { differenceInDays } from "date-fns";
 import Icons from "../../components/icons/MuiIcons";
 
 
+const PRIMARY ='#08edb3';
 // set API link
 let api_base = '';
 
@@ -83,4 +84,4 @@ function getDifference(dueDate: number | Date, todayDate: number | Date) {
 export default getDifference;
 
 
-export { DATE_TODAY, api_base,languages, getUserStatus, logout, getUserInformation, getIcon, getDifference};
+export { PRIMARY,DATE_TODAY, api_base,languages, getUserStatus, logout, getUserInformation, getIcon, getDifference};

@@ -1,5 +1,6 @@
 :root {
-	--primary: #00c8ff;
+	/* --primary: #00c8ff; */
+	--primary:#08edb3;
 	--secondary: #8A4EFC;
 	--light: #EEE;
 	--light-alt: #61759b;
@@ -119,9 +120,9 @@ h4 {
 	border-radius: 999px;
 	font-size: 28px;
 	font-weight: 900;
-	color: var(--light);
+	color: white;
 	background-color: var(--primary);
-	background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
+	background-image: linear-gradient(to bottom right, var(--primary), rgb(142, 168, 161));
 	cursor: pointer;
 	z-index: 2;
 }
