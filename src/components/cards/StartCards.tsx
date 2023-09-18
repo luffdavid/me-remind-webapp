@@ -1,7 +1,7 @@
 import  {useEffect, useState} from 'react'
 import { Alert, AlertTitle,  Backdrop,  CircularProgress,  Snackbar} from '@mui/material'
 import Icons from '../icons/MuiIcons'
-import './StartCards.css'
+import '../../styles/StartCards.css'
 import {Link} from 'react-router-dom'
 import { getTodos } from '../../services/requests/TodoRequests'
 import { TodoInterface } from '../../services/interfaces/TodoInterface';

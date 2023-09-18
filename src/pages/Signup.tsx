@@ -13,9 +13,11 @@ import {
 }
 from 'mdb-react-ui-kit';
 import SignupImage from '../assets/SignupImage.svg'
-import CustomizedButton from '../components/buttons/Button';
+import CustomizedButton from '../components/buttons/ButtonTemplates';
 import TextFieldStyleBlack from '../styles/TextFieldStyle';
 import TextFieldStyle from '../styles/TextFieldStyle';
+import TfStyleSecondary  from '../styles/LoginStyle';
+
 import { PRIMARY } from '../services/constants/Constants';
 function Signup() {
   const [firstName, setFirstName] = useState('');
@@ -29,26 +31,7 @@ function Signup() {
   const [user, setUser] = useState([]);
   const { t } = useTranslation(['auth']);
 
-  const TfStyleSecondary = {
-    backgroundColor:'white',
-    '& label.Mui-focused': {
-      color: PRIMARY,
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: PRIMARY,
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#E0E3E7',
-      },
-      '&:hover fieldset': {
-        borderColor: PRIMARY,
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: PRIMARY,
-      },
-    },
-  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
 

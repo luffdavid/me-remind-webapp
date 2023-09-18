@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Alert, AlertTitle, Box, Button, Modal, Snackbar, Typography, TextField, Tooltip} from '@mui/material'
-import { ModalStyle } from '../../styles/ModalStyle';
-import { TodoInterface } from '../../services/interfaces/TodoInterface';
-import { addNewTodo } from '../../services/requests/TodoRequests';
+import { ModalStyle } from '../../../styles/ModalStyle';
+import { TodoInterface } from '../../../services/interfaces/TodoInterface';
+import { addNewTodo } from '../../../services/requests/TodoRequests';
 import { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -10,11 +10,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useTranslation } from 'react-i18next';
-import { PRIMARY, getUserInformation } from '../../services/constants/Constants';
-import SuccessAlert from '../alerts/SuccessAlert';
-import CustomizedButton from '../buttons/Button';
-import CustomizedTextField from '../../styles/TextFieldStyle';
-import TextFieldStyle from '../../styles/TextFieldStyle';
+import { PRIMARY, getUserInformation } from '../../../services/constants/Constants';
+import SuccessAlert from '../../alerts/SuccessAlert';
+import CustomizedButton from '../ButtonTemplates';
+import CustomizedTextField from '../../../styles/TextFieldStyle';
+import TextFieldStyle from '../../../styles/TextFieldStyle';
 
 const AddButton: React.FC = () => {
   const [todos, setTodos] = useState<TodoInterface[]>([]);

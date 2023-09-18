@@ -3,7 +3,7 @@ import Start from './pages/Start';
 import Topbar from './components/topbar/Topbar';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 import TaskList from './pages/TaskList';
-import AddButton from './components/addbutton/AddButton';
+import AddButton from './components/buttons/addbutton/AddButton';
 import { useTranslation } from 'react-i18next';
 import Login from './pages/Login';
 import Signup from './pages/Signup';

@@ -74,7 +74,11 @@ const handleClose = () => {
             <Avatar
                 onClick={handleMenu}
               >
-                {getUserInformation("firstName")[0]}
+               {getUserInformation("firstName") !== undefined && (
+                <span>
+                  {getUserInformation("firstName")}
+                </span>
+               )} 
               </Avatar>
               
             </Tooltip>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import ButtonInterface from '../../services/interfaces/ButtonInterface'
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText('#08edb3'),
@@ -21,14 +22,9 @@ const SecondaryButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
 }));
 
-interface CustomizedButtonProps {
-  text: string;
-  variant: 'contained' | 'outlined';
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset" | undefined;
-}
 
-export default function CustomizedButton({ text, variant, onClick, type }: CustomizedButtonProps) {
+
+export default function CustomizedButton({ text, variant, onClick, type }: ButtonInterface) {
   if (variant === 'contained') {
     return (
       <Stack spacing={2} direction="row">

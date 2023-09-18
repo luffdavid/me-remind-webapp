@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import successImg from '../../assets/SuccessImage.svg';
 import '../../styles/SuccessAlert.css';
 
-const SuccessAlert: React.FC = () => {
+const ErrorAlert: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -26,4 +26,4 @@ const SuccessAlert: React.FC = () => {
   );
 }
 
-export default SuccessAlert;
+export default ErrorAlert;

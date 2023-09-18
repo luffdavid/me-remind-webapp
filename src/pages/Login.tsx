@@ -5,9 +5,11 @@ import { useTranslation } from 'react-i18next';
 import {MDBContainer,MDBCol,MDBRow }from 'mdb-react-ui-kit';
 import LoginImage from '../assets/LoginImage.svg'
 import { ButtonStyleContained } from '../styles/ButtonStyle';
-import CustomizedButton from '../components/buttons/Button';
+import CustomizedButton from '../components/buttons/ButtonTemplates';
 import TextFieldStyle from '../styles/TextFieldStyle';
 import { PRIMARY } from '../services/constants/Constants';
+import TfStyleSecondary from '../styles/LoginStyle';
+
 function Login() {
 
     const [email, setEmail] = useState('');
@@ -18,26 +20,8 @@ function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState([]);
     const { t } = useTranslation(['auth']);
-    const TfStyleSecondary = {
-      backgroundColor:'white',
-      '& label.Mui-focused': {
-        color: PRIMARY,
-      },
-      '& .MuiInput-underline:after': {
-        borderBottomColor: PRIMARY,
-      },
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-          borderColor: '#E0E3E7',
-        },
-        '&:hover fieldset': {
-          borderColor: PRIMARY,
-        },
-        '&.Mui-focused fieldset': {
-          borderColor: PRIMARY,
-        },
-      },
-    }
+    
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
         try {
