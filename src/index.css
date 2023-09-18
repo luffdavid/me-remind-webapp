@@ -4,8 +4,8 @@
 	--secondary: #8A4EFC;
 	--light: #EEE;
 	--light-alt: #61759b;
-	/* --dark: #131A26; */
-	--dark: #2c2c2c;
+	--dark: #131A26;
+	/* --dark: #; */
 	/* --dark-alt: #202B3E; */
 	--dark-alt: #121212;
 	--sucess: #22ff00;
@@ -44,7 +44,7 @@ h4 {
 
 .todo {
 	position: relative;
-	background-color: var(--dark);
+	background-color: rgb(31, 31, 31);
 	padding: 32px;
 	height: auto;
 	border-radius: 16px;
@@ -67,6 +67,7 @@ h4 {
 
 .todo:hover {
 	opacity: 0.8;
+	background-color: rgb(58, 58, 58);
 }
 
 .todo .checkbox {

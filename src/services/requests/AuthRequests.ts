@@ -27,7 +27,7 @@ export const login = async (email: string, password: string): Promise<any> => {
       return "Error";
     }
   } catch (error) {
-      console.error("Anmeldung fehlgeschlagen");
+      console.error("Anmeldung fehlgeschlagen", error);
       return "Error";
   }
     };

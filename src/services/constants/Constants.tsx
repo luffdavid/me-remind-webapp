@@ -64,21 +64,9 @@ function getIcon (taskType : string) {
 
 
 function getDifference(dueDate: number | Date, todayDate: number | Date) {
-  // const { t } = useTranslation(['tasklist']);
   const diff = differenceInDays(dueDate, todayDate);
   let text = '';
   return diff;
-//  if (diff === -1) {
-//     text = t("yesterdayDue", {ns: ['tasklist']});
-//   } else if (diff === 0) {
-//     text = t("todayDue", {ns: ['tasklist']});
-//   } else if(diff > 1) {
-//     text =  t("dueIn", {ns: ['tasklist']}) + diff + " " + t("days", {ns: ['tasklist']})
-//   } else if(diff < -1) {
-//     text =  t("dueOver", {ns: ['tasklist']}) + Math.abs(diff) + " " + t("days", {ns: ['tasklist']})
-//   }
-
-//   return <i>{text}</i>;
 }
 
 export default getDifference;

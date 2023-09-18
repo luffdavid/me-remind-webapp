@@ -6,6 +6,8 @@ import {MDBContainer,MDBCol,MDBRow }from 'mdb-react-ui-kit';
 import LoginImage from '../assets/LoginImage.svg'
 import { ButtonStyleContained } from '../styles/ButtonStyle';
 import CustomizedButton from '../components/buttons/Button';
+import TextFieldStyle from '../styles/TextFieldStyle';
+import { PRIMARY } from '../services/constants/Constants';
 function Login() {
 
     const [email, setEmail] = useState('');
@@ -16,7 +18,26 @@ function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState([]);
     const { t } = useTranslation(['auth']);
-
+    const TfStyleSecondary = {
+      backgroundColor:'white',
+      '& label.Mui-focused': {
+        color: PRIMARY,
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: PRIMARY,
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#E0E3E7',
+        },
+        '&:hover fieldset': {
+          borderColor: PRIMARY,
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: PRIMARY,
+        },
+      },
+    }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
         try {
@@ -84,8 +105,8 @@ function Login() {
         <h1 style={{color:'white', textAlign:'center'}}>LOGIN</h1>
               <form style={{ width: '100%', marginTop: '8px' }} onSubmit={handleSubmit}>
               <TextField
-            variant="filled"
-            sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
+            variant="outlined"
+            sx={TfStyleSecondary}
             margin="normal"
             required
             fullWidth
@@ -95,8 +116,8 @@ function Login() {
             onChange={ (e) => setEmail(e.target.value)}
           />
           <TextField
-            variant="filled"
-            sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
+            variant="outlined"
+            sx={TfStyleSecondary}
             margin="normal"
             required
             fullWidth
@@ -116,14 +137,6 @@ function Login() {
           
           />
           </div>
-          
-          {/* <Button
-             type="submit"
-             fullWidth
-             variant="contained"
-            style={ButtonStyleContained}
-            //  style={{ margin: '24px 0 16px', padding:'10px', borderRadius:'10px' }}
-             >{t("login", {ns: ['auth']})}</Button> */}
           </form>
         </MDBCol>
       </MDBRow>

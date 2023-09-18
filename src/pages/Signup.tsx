@@ -14,6 +14,9 @@ import {
 from 'mdb-react-ui-kit';
 import SignupImage from '../assets/SignupImage.svg'
 import CustomizedButton from '../components/buttons/Button';
+import TextFieldStyleBlack from '../styles/TextFieldStyle';
+import TextFieldStyle from '../styles/TextFieldStyle';
+import { PRIMARY } from '../services/constants/Constants';
 function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -26,8 +29,28 @@ function Signup() {
   const [user, setUser] = useState([]);
   const { t } = useTranslation(['auth']);
 
+  const TfStyleSecondary = {
+    backgroundColor:'white',
+    '& label.Mui-focused': {
+      color: PRIMARY,
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: PRIMARY,
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#E0E3E7',
+      },
+      '&:hover fieldset': {
+        borderColor: PRIMARY,
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: PRIMARY,
+      },
+    },
+  }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Verhindert, dass das Formular standardmäßig gesendet wird
+    e.preventDefault(); 
 
     if (password.length < 6) {
       setErrorMsg("Password lenght must be > 5 ")
@@ -103,8 +126,8 @@ function Signup() {
         <h1 style={{color:'white', textAlign:'center'}}>{t("signup", {ns: ['auth']})} </h1>
               <form style={{ width: '100%', marginTop: '8px' }} onSubmit={handleSubmit}>
          <TextField
+            sx={TfStyleSecondary}
             variant="outlined"
-             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             margin="normal"
             required
             fullWidth
@@ -115,7 +138,7 @@ function Signup() {
             />
           <TextField
             variant="outlined"
-             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
+            sx={TfStyleSecondary}
             margin="normal"
             required
             fullWidth
@@ -125,9 +148,9 @@ function Signup() {
             onChange={ (e) => setLastName(e.target.value)}
             />
           <TextField
+            sx={TfStyleSecondary}
             variant="outlined"
             margin="normal"
-             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             required
             fullWidth
             label={t("email", {ns: ['auth']})}
@@ -136,9 +159,9 @@ function Signup() {
             onChange={ (e) => setEmail(e.target.value)}
           />
           <TextField
+             sx={TfStyleSecondary}
             variant="outlined"
             margin="normal"
-             sx={{backgroundColor:'white', color:'black', borderRadius:'10px'}}
             required
             fullWidth
             label={t("password", {ns: ['auth']})}
@@ -146,18 +169,26 @@ function Signup() {
             value={password}
             onChange={ (e) => setPassword(e.target.value)}
           />
-          <div className="d-flex justify-content-between mx-4 mb-4">
-            <a href="/login" style={{color:'white', opacity:'0.7', textDecoration:'none'}}>  {t("loginLink", {ns: ['auth']})} </a>
+          <div className="d-flex justify-content-between mx-4 mb-4" >
+          <a
+  href="/login"
+  style={{
+    color: 'white',
+    opacity: '0.7',
+    textDecoration: 'none',
+  }}
+>
+  {t("loginLink", { ns: ['auth'] })}
+</a>
           </div>
-         {/* <Button
-             type="submit"
-             fullWidth
-             variant="contained"
-             color="primary"
-             style={{
-             text={t("signup", {ns: ['auth']})} 
-
-           /> */}
+          <div style={{display:'flex', justifyContent:'right' }}>
+          <CustomizedButton
+          type='submit'
+          variant='contained'
+          text={t("signup", {ns: ['auth']})}
+          
+          />
+          </div>
           </form>
         </MDBCol>
       </MDBRow>
